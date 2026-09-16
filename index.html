@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校招求职全能助手 · 简历 · 匹配 · JD · 面试 · 投递 · Offer · 公司库</title>
+<style>
+  :root{
+    --bg:#f7f1e4;
+    --bg-soft:#fdf9f0;
+    --card:#ffffff;
+    --ink:#3a3327;
+    --ink-soft:#6b6152;
+    --line:#e7dcc7;
+    --accent:#b0783a;
+    --accent-soft:#f0e2c8;
+    --accent-ink:#8a5a22;
+    --green:#2f8a4e;
+    --green-soft:#e2f2e6;
+    --orange:#c97a2a;
+    --orange-soft:#f9ecd9;
+    --red:#b3372a;
+    --red-soft:#fbe4e0;
+    --blue:#2f6fa8;
+    --blue-soft:#e2eef7;
+    --shadow:0 4px 18px rgba(58,51,39,.08), 0 1px 3px rgba(58,51,39,.05);
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.65;
+    font-size:15px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:20px 20px 60px}
+  header.apphead{margin-bottom:20px}
+  .apptitle{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .logo{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#b0783a,#d9a45f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow)}
+  .apptitle h1{font-size:22px;margin:0;letter-spacing:.5px}
+  .apptitle p{margin:4px 0 0;color:var(--ink-soft);font-size:13px}
+  .badge{font-size:12px;color:var(--accent-ink);background:var(--accent-soft);padding:3px 9px;border-radius:20px;font-weight:600}
+
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 22px;background:var(--card);padding:8px;border-radius:var(--radius);box-shadow:var(--shadow)}
+  nav.tabs button{
+    border:none;background:transparent;color:var(--ink-soft);padding:9px 16px;border-radius:9px;cursor:pointer;font-size:14px;font-weight:600;transition:.15s;
+  }
+  nav.tabs button:hover{background:var(--accent-soft);color:var(--accent-ink)}
+  nav.tabs button.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(176,120,58,.35)}
+
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .card h2{font-size:17px;margin:0 0 4px}
+  .card .sub{color:var(--ink-soft);font-size:13px;margin:0 0 16px}
+  .row{display:flex;gap:16px;flex-wrap:wrap}
+  .col{flex:1;min-width:260px}
+  label{display:block;font-size:13px;color:var(--ink-soft);margin:0 0 6px;font-weight:600}
+  textarea,input[type=text],select{
+    width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:var(--bg-soft);color:var(--ink);font-size:14px;font-family:inherit;transition:.15s;
+  }
+  textarea{min-height:110px;resize:vertical;line-height:1.6}
+  textarea:focus,input:focus,select:focus{outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(176,120,58,.14)}
+  .btn{
+    border:none;border-radius:9px;cursor:pointer;font-weight:600;font-size:14px;padding:11px 18px;transition:.15s;
+  }
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover{background:#9a6629}
+  .btn.ghost{background:transparent;color:var(--accent-ink);border:1px solid var(--line)}
+  .btn.ghost:hover{background:var(--accent-soft)}
+  .btn.sm{padding:7px 12px;font-size:13px}
+  .btn.danger{background:var(--red-soft);color:var(--red)}
+  .btn.danger:hover{background:#f5d2cc}
+  .btn-soft{background:var(--green);color:#fff}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .hint{font-size:12px;color:var(--ink-soft);margin-top:6px}
+  .inline-flex{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .inline-flex .btn{margin-top:0}
+
+  .tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;margin:0 6px 6px 0}
+  .tag.ok{background:var(--green-soft);color:var(--green)}
+  .tag.miss{background:var(--orange-soft);color:var(--orange)}
+  .tag.soft{background:var(--blue-soft);color:var(--blue)}
+
+  .stat-grid{display:flex;gap:14px;margin:16px 0;flex-wrap:wrap}
+  .stat{flex:1;min-width:140px;background:var(--bg-soft);border-radius:9px;padding:14px;text-align:center}
+  .stat .num{font-size:26px;font-weight:700}
+  .stat .lbl{font-size:12px;color:var(--ink-soft)}
+
+  .fix-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;background:var(--bg-soft);border-radius:9px;padding:10px 12px;border:1px solid transparent;transition:.15s}
+  .fix-row:hover{border-color:var(--line);background:#fff}
+  .fix-row textarea{min-height:54px;background:#fff}
+  .fix-row .num{font-weight:700;color:var(--accent);min-width:20px;padding-top:12px}
+  .fix-ops{display:flex;flex-direction:column;gap:4px}
+  .fix-ops button{border:none;background:transparent;cursor:pointer;color:var(--ink-soft);font-size:15px;padding:2px 6px;border-radius:6px}
+  .fix-ops button:hover{background:var(--accent-soft);color:var(--accent-ink)}
+
+  .divider{border:none;border-top:1px dashed var(--line);margin:20px 0}
+  .callout{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 9px 9px 0;padding:12px 16px;font-size:13px;color:var(--accent-ink)}
+  .callout b{display:block;margin-bottom:4px}
+  code.prompt{display:block;background:#3a3327;color:#f0e2c8;padding:12px 14px;border-radius:9px;font-size:12.5px;line-height:1.6;white-space:pre-wrap;margin-top:8px}
+
+  ul.plain{margin:8px 0;padding-left:20px}
+  ul.plain li{margin:5px 0}
+
+  .qa-item{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px}
+  .qa-item .q{font-weight:700;font-size:14.5px;margin-bottom:6px}
+  .qa-item .a{font-size:13.5px;color:var(--ink);white-space:pre-wrap}
+  .qa-item .ops{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .familiar{display:inline-flex;gap:2px}
+  .familiar .dot{width:12px;height:12px;border-radius:50%;cursor:pointer;border:2px solid var(--line);background:#fff}
+  .familiar .dot.on{background:var(--accent);border-color:var(--accent)}
+  .progbar{height:8px;background:var(--bg-soft);border-radius:20px;overflow:hidden;margin-top:8px}
+  .progbar > i{display:block;height:100%;background:var(--green);border-radius:20px;transition:.3s}
+
+  .track{width:100%;border-collapse:collapse;font-size:13.5px}
+  .track th,.track td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}
+  .track th{color:var(--ink-soft);font-weight:600;font-size:12.5px}
+  .track tr:hover td{background:var(--bg-soft)}
+  .status-pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600}
+  .st-0{background:var(--blue-soft);color:var(--blue)}
+  .st-1{background:var(--accent-soft);color:var(--accent-ink)}
+  .st-2{background:var(--orange-soft);color:var(--orange)}
+  .st-3{background:var(--green-soft);color:var(--green)}
+  .st-4{background:linear-gradient(135deg,#2f8a4e,#1f6b3a);color:#fff}
+  .st-5{background:var(--red-soft);color:var(--red)}
+
+  .empty{text-align:center;color:var(--ink-soft);padding:28px 10px;font-size:13.5px}
+  .empty .icon{font-size:34px;margin-bottom:8px}
+  .num-r{font-variant-numeric:tabular-nums;text-align:right}
+  .ov-score{font-size:20px;font-weight:700;color:var(--accent)}
+  .comp-card{background:var(--bg-soft);border-radius:9px;padding:13px 15px;margin-bottom:10px}
+  .comp-card .head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .comp-card .head b{font-size:14.5px}
+  .comp-card .meta{font-size:12px;color:var(--ink-soft);margin:4px 0 8px}
+  .comp-card .ops{display:flex;gap:6px;flex-wrap:wrap}
+  .table-wrap{overflow-x:auto}
+  #ps-table{width:100%;border-collapse:collapse;font-size:13px}
+  #ps-table th,#ps-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  #ps-table th{background:var(--bg-soft);font-weight:600}
+  #ps-table td.no-wrap{white-space:nowrap}
+  .v-badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600}
+  .v-ok{background:var(--green-soft);color:var(--green)}
+  .v-warn{background:var(--orange-soft);color:var(--orange)}
+  .v-bad{background:var(--red-soft);color:var(--red)}
+  .diff-pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent-ink)}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#3a3327;color:#fff;padding:11px 20px;border-radius:30px;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;transition:.25s;pointer-events:none;z-index:99}
+  .toast.show{opacity:1}
+  .hidden{display:none!important}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  footer.appfoot{margin-top:34px;text-align:center;color:var(--ink-soft);font-size:12.5px}
+  footer.appfoot .pit{font-size:12px;color:var(--accent-ink);background:var(--accent-soft);display:inline-block;padding:6px 12px;border-radius:20px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="apphead">
+    <div class="apptitle">
+      <div class="logo">🎯</div>
+      <div>
+        <h1>校招求职全能助手</h1>
+        <p>简历 · 岗位匹配 · JD 分析 · 面试 · 投递 · Offer 对比 · 公司库 —— 纯本地运行，数据不出电脑</p>
+      </div>
+      <span class="badge">真实有用 · 应届生友好</span>
+    </div>
+    <nav class="tabs">
+      <button data-tab="r" class="active">简历写作</button>
+      <button data-tab="m">岗位筛选</button>
+      <button data-tab="jd">JD 分析</button>
+      <button data-tab="i">面试对话</button>
+      <button data-tab="t">求职记录</button>
+      <button data-tab="o">Offer 对比</button>
+      <button data-tab="c">公司信息</button>
+    </nav>
+  </header>
+
+  <!-- ============ Tab 1 简历写作 ============ -->
+  <section class="panel active" id="p-r">
+    <div class="card">
+      <h2>项目亮点提炼器</h2>
+      <p class="sub">把一段流水账式的项目描述，提炼成 3–5 条能写进简历、有动作又有结果的亮点。</p>
+      <div class="row">
+        <div class="col">
+          <label>项目 / 实习名称</label>
+          <input type="text" id="r-name" placeholder="例如：校园二手图书交易平台">
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <label>一段经历描述（写越细，提炼越准）</label>
+        <textarea id="r-desc" placeholder="示例：负责开发学校二手书交易平台的前端，用 Vue 搭建了商品列表和详情页，实现搜索和筛选功能。为了提升性能，把首屏加载时间从 3 秒优化到 1.2 秒，日活用户从 200 涨到 800。还在团队里负责代码 review 和 Git 分支管理。"></textarea>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="r-gen">提炼亮点</button>
+        <button class="btn ghost" id="r-example">填入示例</button>
+        <button class="btn ghost" id="r-clear">清空</button>
+      </div>
+      <div class="hint">我们只做本地规则提炼，给出一版开头；每条都可再编辑 / 添加数字 / 换措辞。</div>
+    </div>
+
+    <div class="card hidden" id="r-out">
+      <div class="row">
+        <div class="col">
+          <h2>提炼结果</h2>
+        </div>
+        <div style="display:flex;gap:8px;margin-left:auto">
+          <button class="btn ghost sm" id="r-copy-text">复制纯文本</button>
+          <button class="btn ghost sm" id="r-copy-md">复制 Markdown</button>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:4px">点每条右上角的「①」可触发"补数字"提示；"✎"可编辑；↑↓排序；×删除。</p>
+      <div id="r-list"></div>
+      <div class="callout" style="margin-top:14px">
+        <b>复用提醒</b>
+        亮点要"动词 + 动作对象 + 量化结果"。如果某条还没数字，点它的「②数字化」按钮，会给出该往哪补具体数字的提示。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>STAR 结构化模板</h2>
+      <p class="sub">不会开局动笔？按这个四步填，亮点就有了骨架。</p>
+      <div class="grid2">
+        <div class="callout"><b>S · 情境 (Situation)</b>当时是什么场景/背景、面对什么问题？</div>
+        <div class="callout"><b>T · 任务 (Task)</b>你负责什么具体任务、要达成什么目标？</div>
+        <div class="callout"><b>A · 行动 (Action)</b>你做了什么、用了什么方法或技术、做了什么决策？</div>
+        <div class="callout"><b>R · 结果 (Result)</b>最终结果如何？最好有数字或对比。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>AI 深度改写提示词库</h2>
+      <p class="sub">把下面的提示词粘给 TraeCode 或任何生成式 AI，可让亮点进一步升级。</p>
+      <code class="prompt" id="p1">我正在准备校招简历。请把我下面这段项目经历，改写成 3 条紧凑、可量化的简历亮点，每条都用「动词 + 成果数字」开头，避免空泛形容词，总字数控制在每条 40 字以内。\n项目经历：{在这里粘贴你的描述}</code>
+      <code class="prompt" id="p2">我投的是「前端工程师」岗。请基于下面这段经历，重点向我这个岗位靠拢：把与技术栈无关的表述弱化，突出组件化、性能优化、工程化与协作能力，同时补齐我认为缺的量化数据。\n经历：{粘贴}</code>
+    </div>
+  </section>
+
+  <!-- ============ Tab 2 岗位匹配 ============ -->
+  <section class="panel" id="p-m">
+    <div class="card">
+      <h2>岗位匹配体检</h2>
+      <p class="sub">粘贴目标岗位 JD + 我的技能/项目要点，本地关键词打分出"匹配度 + 命中 / 缺失 + 优化建议"。</p>
+      <div class="row">
+        <div class="col">
+          <label>招聘 JD（职位描述全文）</label>
+          <textarea id="m-jd" placeholder="粘贴岗位要求……"></textarea>
+        </div>
+        <div class="col">
+          <label>我的技能 / 项目要点（简历里的）</label>
+          <textarea id="m-me" placeholder="粘贴你在简历中列出的技能、语言、框架、项目关键词……"></textarea>
+        </div>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="m-run">开始测评</button>
+        <button class="btn ghost" id="m-example">填入示例</button>
+      </div>
+      <div class="hint">纯本地规则计算的参考分，仅帮你找"缺什么、突出什么"，不替代任何筛选结论。</div>
+    </div>
+
+    <div class="card hidden" id="m-out">
+      <div class="stat-grid">
+        <div class="stat"><div class="num" id="m-score">--</div><div class="lbl">关键词覆盖率</div></div>
+        <div class="stat"><div class="num" id="m-hit">0</div><div class="lbl">命中技能</div></div>
+        <div class="stat"><div class="num" id="m-miss">0</div><div class="lbl">缺失技能</div></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <label>命中项（简历已覆盖，可在面试中主动强化）</label>
+        <div id="m-hit-list"></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <label>缺失项（建议补学 / 在简历补充）</label>
+        <div id="m-miss-list"></div>
+      </div>
+      <div>
+        <label>针对该岗位的落地建议</label>
+        <ul class="plain" id="m-adv"></ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="col"><h2>多岗位筛选 & 投递助手</h2></div>
+        <div style="margin-left:auto"><button class="btn ghost sm" id="ps-add">＋ 添加一条</button></div>
+      </div>
+      <p class="sub">从 BOSS APP 点职位「分享」复制文字卡片（或网页复制 JD），一条一个粘贴框贴进来。全自动拆出 公司/岗位/薪资/城市/硬性要求，并对照你的画像给出「该不该投 + 投递建议」，可一键记投递 / 存公司库。</p>
+      <div id="ps-list"></div>
+      <div class="inline-flex">
+        <button class="btn primary" id="ps-run">开始筛选</button>
+        <button class="btn ghost" id="ps-clear">清空</button>
+      </div>
+      <div class="hint">对照用的「我的画像」复用上方【岗位匹配体检】里的「我的技能/项目要点」；为空则只拆解析字段、不做命中判断。</div>
+    </div>
+
+    <div class="card hidden" id="ps-out">
+      <h2>筛选结果（按适配度排序）</h2>
+      <div class="table-wrap">
+        <table id="ps-table">
+          <thead><tr><th>公司</th><th>岗位</th><th>薪资</th><th>城市</th><th>硬性要求</th><th>技能命中</th><th>结论</th><th>操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="hint">结论依据「硬性要求是否达标 + 技能命中率」给出 建议投 / 看情况 / 不投，仅供参考，不替代任何筛选结论。</div>
+    </div>
+
+    <div class="card">
+      <h2>BOSS 取字书签（可选）</h2>
+      <p class="sub">BOSS 网页版岗位文字禁选复制时，把下面的「取字」按钮拖到浏览器收藏夹，在岗位页点一下即可解锁选中文字，再复制回来。APP 版直接用「分享」复制卡片即可，无需此步。</p>
+      <div class="inline-flex" style="align-items:flex-start;flex-wrap:wrap">
+        <a class="btn primary sm" id="ps-bookmark" href="javascript:(function(){var el=document.createElement('style');el.textContent='*{user-select:auto!important;-webkit-user-select:auto!important}';document.head.appendChild(el);alert('已解锁，可复制页面文字');})();">拖我到收藏夹</a>
+        <button class="btn ghost sm" id="ps-copy-bm">复制代码手动加</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tab 3 面试对话 ============ -->
+  <section class="panel" id="p-i">
+    <div class="card">
+      <h2>自我介绍生成器</h2>
+      <p class="sub">填四块，自动拼一段结构化的 1 分钟 / 3 分钟自我介绍脚本。</p>
+      <div class="grid2">
+        <div><label>教育背景</label><textarea id="i-edu" style="min-height:64px" placeholder="学校 / 专业 / 年级，相关成绩或课程"></textarea></div>
+        <div><label>经历亮点（实习/项目/竞赛，挑 1-2 段最强的）</label><textarea id="i-exp" style="min-height:64px" placeholder="简要概括，最好带成果数字"></textarea></div>
+        <div><label>技能与优势</label><textarea id="i-skill" style="min-height:64px" placeholder="技术栈 / 能力 / 特点"></textarea></div>
+        <div><label>求职动机（为什么选这家/这个岗）</label><textarea id="i-mot" style="min-height:64px" placeholder="结合岗位说一点"></textarea></div>
+      </div>
+      <div class="inline-flex" style="align-items:center">
+        <button class="btn primary" id="i-gen">生成脚本</button>
+        <select id="i-len" style="width:auto;flex:0">
+          <option value="1">1 分钟版</option>
+          <option value="3">3 分钟版</option>
+        </select>
+        <button class="btn ghost sm" id="i-copy">复制脚本</button>
+      </div>
+      <div id="i-out" class="hidden" style="margin-top:14px">
+        <div class="callout"><b>你的自我介绍脚本</b><div id="i-script" style="white-space:pre-wrap"></div></div>
+        <div class="hint" style="margin-top:6px">脚本是骨架，练习时请把语气改成自然口语，去掉"背"的味道。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="col"><h2>高频问答库 & 模拟抽题</h2></div>
+        <div style="margin-left:auto">
+          <button class="btn ghost sm" id="i-shuffle">🎲 随机抽一题</button>
+        </div>
+      </div>
+      <p class="sub">点每题右下小圆点标记熟练度（1–4），进度条会实时更新。</p>
+      <div style="margin-bottom:14px">
+        <label>复习进度</label>
+        <div class="progbar"><i id="i-prog" style="width:0%"></i></div>
+        <div class="hint" id="i-prog-txt">0 / 0 题已标记（≥3）</div>
+      </div>
+      <div id="i-qa"></div>
+    </div>
+
+    <div class="card">
+      <h2>HR 沟通要诀</h2>
+      <p class="sub">面试前后和 HR / 面试官对话的加分点与雷区。</p>
+      <ul class="plain">
+        <li><b>加分话术：</b>提问环节问"这个岗位的成长路径 / 团队构成 / 用的技术规模"，显得有诚意。</li>
+        <li><b>加分话术：</b>被问"还有什么想问"时，先问对方在意的问题，再表示感谢。</li>
+        <li><b>加分话术：</b>讲失败经历时，用"当时没做到 → 我复盘 → 后来改进"的结构，展现成长。</li>
+        <li><b>雷区：</b>不要只说"我很努力、我学习能力强"，要配上具体事例佐证。</li>
+        <li><b>雷区：</b>只谈付出不谈结果，或夸大不熟悉的技能 —— 被追问就容易露馅。</li>
+        <li><b>雷区：</b>吐槽前公司 / 学校或所投的其他公司，显得不稳重。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Tab 4 求职记录 ============ -->
+  <section class="panel" id="p-t">
+    <div class="card">
+      <h2>投递记录</h2>
+      <p class="sub">记录每次投递并推进状态，看板帮你盯住"卡了很久没进展"的企业。</p>
+      <div class="grid2">
+        <div><label>公司名</label><input type="text" id="t-co" placeholder="例如：字节跳动"></div>
+        <div><label>岗位</label><input type="text" id="t-pos" placeholder="例如：测试开发工程师"></div>
+        <div><label>投递来源</label><input type="text" id="t-src" placeholder="例如：官网 / 内推 / 牛客"></div>
+        <div><label>投递日期</label><input type="date" id="t-date"></div>
+        <div style="grid-column:1/-1"><label>备注（面试时间 / 还差的材料）</label><input type="text" id="t-note" placeholder="选填"></div>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="t-add">新增记录</button>
+        <button class="btn ghost sm" id="t-export">导出 JSON</button>
+        <button class="btn ghost sm" id="t-import-btn">导入 JSON</button>
+        <input type="file" id="t-import" accept=".json,application/json" class="hidden">
+      </div>
+    </div>
+
+    <div class="card" id="t-empty">
+      <div class="empty"><div class="icon">📭</div>还没有投递记录。新增一条，看板会自动统计「卡了很久未推进」的企业。</div>
+    </div>
+
+    <div class="card hidden" id="t-board">
+      <div class="stat-grid" id="t-stats"></div>
+      <div id="t-stuck" style="margin-bottom:14px"></div>
+      <div style="overflow-x:auto">
+        <table class="track" id="t-table">
+          <thead><tr><th>公司</th><th>岗位</th><th>来源</th><th>投递日</th><th>状态</th><th>最后推进</th><th>备注</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tab 5 JD 分析 ============ -->
+  <section class="panel" id="p-jd">
+    <div class="card">
+      <h2>JD 分析</h2>
+      <p class="sub">粘贴一条招聘 JD，本地拆解出职责要点、硬性/加分要求、技能关键词与薪资区间，并给出投前自检。</p>
+      <div class="grid2">
+        <div><label>公司名（可选）</label><input type="text" id="jd-co" placeholder="例如：某科技有限公司"></div>
+        <div><label>岗位名（可选）</label><input type="text" id="jd-title" placeholder="例如：前端开发实习生"></div>
+      </div>
+      <div style="margin-top:12px">
+        <label>JD 全文</label>
+        <textarea id="jd-text" placeholder="粘贴职位描述……"></textarea>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="jd-run">开始分析</button>
+        <button class="btn ghost" id="jd-example">填入示例</button>
+      </div>
+      <div class="hint">纯本地规则拆解，仅供"提前梳理、心里有底"，不代表任何招聘方的真实筛选口径。</div>
+    </div>
+
+    <div class="card hidden" id="jd-out">
+      <div class="row">
+        <div class="col"><h2>分析结果</h2></div>
+        <div style="margin-left:auto">
+          <button class="btn ghost sm" id="jd-saveco">📁 存入公司信息</button>
+        </div>
+      </div>
+      <div style="margin-bottom:14px">
+        <label>薪资区间提示</label>
+        <div class="callout" id="jd-salary" style="min-height:20px"></div>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div style="background:var(--bg-soft);border-radius:9px;padding:14px">
+          <label style="margin-bottom:8px">🔸 职责要点</label>
+          <ul class="plain" id="jd-duty"></ul>
+        </div>
+        <div style="background:var(--bg-soft);border-radius:9px;padding:14px">
+          <label style="margin-bottom:8px">🔹 硬性要求</label>
+          <ul class="plain" id="jd-hard"></ul>
+          <label style="margin:14px 0 8px">⭐ 加分项</label>
+          <ul class="plain" id="jd-plus"></ul>
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <label>技能 / 必查关键词</label>
+        <div id="jd-kw"></div>
+      </div>
+      <div style="margin-top:14px">
+        <label>投递前自检清单</label>
+        <ul class="plain" id="jd-check"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tab 6 Offer 对比 ============ -->
+  <section class="panel" id="p-o">
+    <div class="card">
+      <h2>Offer 对比</h2>
+      <p class="sub">录入多家 Offer，自动估算年薪 / 参考时薪，并按你的权重打分排序。所有数字都是本地估算、仅供参考。</p>
+      <div class="grid2" id="offer-fields">
+        <div><label>公司</label><input type="text" id="o-co" placeholder="公司 A"></div>
+        <div><label>岗位</label><input type="text" id="o-pos" placeholder="后端开发"></div>
+        <div><label>城市</label><input type="text" id="o-city" placeholder="北京"></div>
+        <div><label>Base 月薪（元）</label><input type="number" id="o-base" placeholder="18000"></div>
+        <div><label>年终（月数）</label><input type="number" id="o-mid" step="0.5" placeholder="2"></div>
+        <div><label>签字费（元）</label><input type="number" id="o-sign" placeholder="30000"></div>
+        <div><label>股票/期权（万元/年折算）</label><input type="number" id="o-stock" step="0.1" placeholder="5"></div>
+        <div><label>公积金比例（%）</label><input type="number" id="o-fund" placeholder="12"></div>
+        <div><label>每月补贴（元）</label><input type="number" id="o-allow" placeholder="800"></div>
+        <div><label>加班强度（1 正常 ~ 5 极重）</label><select id="o-overtime"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        <div><label>通勤（分钟，单程）</label><input type="number" id="o-commute" placeholder="40"></div>
+        <div><label>成长性（1-5）</label><select id="o-growth"><option>3</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+        <div><label>稳定性（1-5）</label><select id="o-stab"><option>3</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+        <div style="grid-column:1/-1"><label>备注</label><input type="text" id="o-note" placeholder="选填"></div>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="o-add">添加 Offer</button>
+        <button class="btn ghost sm" id="o-example">填入示例</button>
+        <button class="btn ghost sm" id="o-export">导出 JSON</button>
+        <button class="btn ghost sm" id="o-import-btn">导入 JSON</button>
+        <input type="file" id="o-import" accept=".json,application/json" class="hidden">
+      </div>
+      <div class="hint">估算口径：年薪 ≈ Base×12 + 年终(Base×月数) + 签字费/3 年摊销 + 股票折算 + 每月补贴×12；参考时薪按 21.75 天×8 小时基准，加班强度 1-5 折算到 8~11 小时/天。</div>
+    </div>
+
+    <div class="card" id="o-weight-card">
+      <h2>加权评分</h2>
+      <p class="sub">给每个维度的重视程度配权重（0-5，0 表示不考虑）。主观项（成长/稳定性）可回到上面条目编辑；加班、通勤为反向计分。</p>
+      <div class="grid2" id="o-weights">
+        <div><label>薪资</label><input class="w-in" data-w="salary" type="number" min="0" max="5" value="5"></div>
+        <div><label>成长性</label><input class="w-in" data-w="growth" type="number" min="0" max="5" value="4"></div>
+        <div><label>城市宜居</label><input class="w-in" data-w="city" type="number" min="0" max="5" value="3"></div>
+        <div><label>加班（反向）</label><input class="w-in" data-w="overtime" type="number" min="0" max="5" value="3"></div>
+        <div><label>通勤（反向）</label><input class="w-in" data-w="commute" type="number" min="0" max="5" value="2"></div>
+        <div><label>稳定性</label><input class="w-in" data-w="stab" type="number" min="0" max="5" value="2"></div>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="o-score">计算得分</button>
+        <button class="btn ghost sm" id="o-rm">清空全部</button>
+      </div>
+    </div>
+
+    <div class="card" id="o-empty">
+      <div class="empty"><div class="icon">⚖️</div>还没有任何 Offer。录入 2 家以上即可开始对比。</div>
+    </div>
+    <div class="card hidden" id="o-board">
+      <div style="overflow-x:auto">
+        <table class="track" id="o-table">
+          <thead id="o-thead"></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="o-reco" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- ============ Tab 7 公司信息整理 ============ -->
+  <section class="panel" id="p-c">
+    <div class="card">
+      <h2>公司信息整理</h2>
+      <p class="sub">把感兴趣的公司在本地记下来：薪资区间、面试难度、笔试类型、内推入口，方便搜的时候不靠脑补。</p>
+      <div class="grid2" id="comp-form">
+        <div><label>公司名称 *</label><input type="text" id="c-name" placeholder="公司名"></div>
+        <div><label>行业</label><input type="text" id="c-ind" placeholder="互联网 / 金融 / AI…"></div>
+        <div><label>规模（人数）</label><input type="text" id="c-size" placeholder="500-2000 / 大厂 / 初创"></div>
+        <div><label>城市</label><input type="text" id="c-city" placeholder="北京"></div>
+        <div><label>目标岗位</label><input type="text" id="c-pos" placeholder="前端"></div>
+        <div><label>网上薪资区间</label><input type="text" id="c-salary" placeholder="20-30k / 年薪xx万"></div>
+        <div><label>笔试 / 面试类型</label><input type="text" id="c-interview" placeholder="算法笔试+两轮技术面"></div>
+        <div><label>难度（1 简单 ~ 5 很难）</label><select id="c-diff"><option value="3">3</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+        <div style="grid-column:1/-1"><label>招聘入口 / 内推</label><input type="text" id="c-entry" placeholder="官网校招页 / 内推码 / 链接"></div>
+        <div style="grid-column:1/-1"><label>备注（面经要点、时效等）</label><input type="text" id="c-note" placeholder="选填"></div>
+      </div>
+      <div class="inline-flex">
+        <button class="btn primary" id="c-add">新增公司</button>
+        <button class="btn ghost sm" data-edit="0" id="c-cancel" style="display:none">取消编辑</button>
+        <button class="btn ghost sm" id="c-export">导出 JSON</button>
+        <button class="btn ghost sm" id="c-import-btn">导入 JSON</button>
+        <input type="file" id="c-import" accept=".json,application/json" class="hidden">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="grid2" style="margin-bottom:14px">
+        <div><label>关键词搜索</label><input type="text" id="c-search" placeholder="按名称 / 岗位 / 城市 / 备注搜索"></div>
+        <div><label>行业筛选</label><select id="c-filter"><option value="">全部行业</option></select></div>
+      </div>
+      <div id="c-empty" style="display:none"><div class="empty"><div class="icon">🗂️</div>还没有公司条目，右上角新增一条，或先到「JD 分析」一键存入。</div></div>
+      <div id="c-list"></div>
+    </div>
+  </section>
+
+  <footer class="appfoot">
+    <div>校招求职全能助手 · 纯本地运行 · 数据仅存于你的浏览器</div>
+    <div class="pit">#TRAE求职作品秀 · 用 TRAE 做的真实求职小工具</div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 工具函数 ============ */
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const KEY='jh_apply_records_v1';
+const STALE_DAYS=7;
+
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1600);}
+async function copy(text){try{await navigator.clipboard.writeText(text);toast('已复制');}catch(_){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('已复制');}}
+
+/* 导航切换 */
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  $$('nav.tabs button').forEach(x=>x.classList.toggle('active',x===b));
+  $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+b.dataset.tab));
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ============ Tab 1 简历写作：STAR 提炼 ============ */
+const ACT_VERBS=['负责','开发','设计','实现','搭建','优化','参与','主导','部署','维护','重构','封装','撰写','调研','对接','测试','上线','组织','协调','解决','编写','封装','集成','构建','推动','跟进','落地','分析','梳理'];
+const RESULT_WORDS=['提升','降低','减少','增长','提高','优化','缩短','节省','覆盖','服务','突破','达到','位居','获得','荣获','排名','涨','超过','吞吐','准确率','性能','成本','用户','日活','响应'];
+const TECH_WORDS=['Vue','React','Angular','Node','Java','Python','Spring','MyBatis','MySQL','Redis','Kafka','Docker','K8s','Git','Webpack','TypeScript','JavaScript','C++','Go','Flask','Django','Linux','Nginx','MQ','ES','Hadoop','Spark','Flink','微信小程序','uni-app','SQL','JDBC'];
+
+const $rName=$('#r-name'),$rDesc=$('#r-desc');
+const rLines=[];
+$('#r-example').addEventListener('click',()=>{
+  $rName.value='校园二手图书交易平台';
+  $rDesc.value='负责开发学校二手书交易平台的前端，用 Vue 搭建了商品列表和详情页，实现搜索和筛选功能。为了提升性能，把首屏加载时间从 3 秒优化到 1.2 秒，日活用户从 200 涨到 800。还在团队里负责代码 review 和 Git 分支管理。';
+  toast('已填入示例');
+});
+$('#r-clear').addEventListener('click',()=>{$rName.value='';$rDesc.value='';$('#r-out').classList.add('hidden');$('#r-list').innerHTML='';});
+$('#r-gen').addEventListener('click',()=>{
+  const name=$rName.value.trim(),desc=$rDesc.value.trim();
+  if(!desc){toast('请先填一段经历描述');return;}
+  rLines.length=0;
+  const title=name?`${name} `:'';
+  const pieces=desc.split(/[。；;\n]+/).map(s=>s.trim()).filter(Boolean);
+  pieces.forEach(p=>{
+    const tech=TECH_WORDS.filter(w=>p.includes(w));
+    const isResult=RESULT_WORDS.some(w=>p.includes(w));
+    let t=p;
+    // 带量化结果的句子 → 结果型亮点
+    if(isResult&&/\d/.test(p)){
+      t=`${title}${p}`;
+    }else if(!title){
+      t=p;
+    }else{
+      // 动作前缀
+      const match=p.match(/^(负责|主导|参与|开发|设计|实现|搭建|优化|编写)\S*/);
+      t=match?`${title}${p}`:`${title}完成${p}`;
+    }
+    rLines.push({text:t,tech,hasNum:/\d/.test(t)});
+  });
+  if(rLines.length===0){rLines.push({text:`${title}参与了${desc.slice(0,24)}……`,tech:[],hasNum:false});}
+  // 最多 5 条
+  while(rLines.length>5)rLines.pop();
+  renderRList();
+  $('#r-out').classList.remove('hidden');
+  toast('已提炼 '+rLines.length+' 条亮点');
+});
+
+function renderRList(){
+  const box=$('#r-list');box.innerHTML='';
+  rLines.forEach((line,i)=>{
+    const d=document.createElement('div');d.className='fix-row';
+    d.innerHTML=`
+      <span class="num">${i+1}</span>
+      <textarea data-i="${i}" class="r-edit">${line.text}</textarea>
+      <div class="fix-ops">
+        <button title="数字化提示" class="r-num" data-i="${i}">②</button>
+        <button title="上移" class="r-up" data-i="${i}">↑</button>
+        <button title="下移" class="r-down" data-i="${i}">↓</button>
+        <button title="删除" class="r-del" data-i="${i}">×</button>
+      </div>`;
+    box.appendChild(d);
+  });
+  box.querySelectorAll('.r-edit').forEach(t=>{
+    t.addEventListener('input',e=>{rLines[+e.target.dataset.i].text=e.target.value;rLines[+e.target.dataset.i].hasNum=/\d/.test(e.target.value);});
+  });
+  box.querySelectorAll('.r-num').forEach(b=>b.addEventListener('click',e=>{
+    const li=rLines[+e.target.dataset.i];
+    if(li.hasNum){toast('这条已含数字 ✔ 可再检查数字是否可信');}
+    else{toast('试着补上具体数字：处理了多少 / 提升多少 / 支撑多大 / 服务多少人');}
+  }));
+  box.querySelectorAll('.r-up').forEach(b=>b.addEventListener('click',e=>{const i=+e.target.dataset.i;if(i>0){[rLines[i-1],rLines[i]]=[rLines[i],rLines[i-1]];renderRList();}}));
+  box.querySelectorAll('.r-down').forEach(b=>b.addEventListener('click',e=>{const i=+e.target.dataset.i;if(i<rLines.length-1){[rLines[i+1],rLines[i]]=[rLines[i],rLines[i+1]];renderRList();}}));
+  box.querySelectorAll('.r-del').forEach(b=>b.addEventListener('click',e=>{rLines.splice(+e.target.dataset.i,1);renderRList();}));
+}
+$('#r-copy-text').addEventListener('click',()=>copy(rLines.map(l=>'· '+l.text).join('\n')));
+$('#r-copy-md').addEventListener('click',()=>copy(rLines.map(l=>'- '+l.text).join('\n')));
+$$('#p-r code.prompt').forEach(c=>c.addEventListener('click',()=>copy(c.textContent.replace(/^\{[\s\S]*?\}$\n?/m,'{在这里粘贴你的描述}'))));
+$$('#p-r code.prompt').forEach(c=>{c.style.cursor='pointer';c.title='点击复制';});
+
+/* ============ Tab 2 岗位匹配 ============ */
+const SKILLS={
+  'vue|react|react native|angular|前端':['Vue','React','Angular'],
+  'html|css|javascript|webpack|typescript|node|前端工程化':['HTML','CSS','JavaScript','Webpack','TypeScript','Node.js'],
+  'java|spring|mybatis|jvm|微服务':['Java','Spring','SpringBoot','MyBatis','JVM','微服务'],
+  'python|django|flask|爬虫|数据分析':['Python','Django','Flask','数据分析'],
+  '数据库|mysql|postgresql|sql|oracle':['MySQL','PostgreSQL','SQL','数据库'],
+  'redis|缓存':['Redis','缓存'],
+  '消息队列|kafka|rabbitmq|rocketmq':['Kafka','RabbitMQ','RocketMQ','消息队列'],
+  '分布式|一致性|高并发|性能优化':['分布式','高并发','性能优化','一致性'],
+  'docker|k8s|kubernetes|容器|ci/cd|jenkins':['Docker','K8s','Kubernetes','CI/CD','Jenkins','容器'],
+  'linux|nginx|运维|shell':['Linux','Nginx','Shell','运维'],
+  '算法|数据结构|leetcode|排序':['算法','数据结构'],
+  '机器学习|深度学习|pytorch|tensorflow|nlp|cv':['机器学习','深度学习','PyTorch','TensorFlow','NLP','CV'],
+  '产品|需求|原型|axure|axure|用户研究':['产品','需求分析','原型','Axure','用户研究'],
+  '运营|用户增长|内容|社群|活动':['用户增长','内容运营','社群运营','活动运营'],
+  '测试|自动化|selenium|接口测试|jira':['测试','自动化测试','Selenium','接口测试','Jira'],
+  'git|版本控制':['Git','版本控制'],
+};
+const SKILL_LABELS=Object.values(SKILLS).flat();
+function collectJdSkills(text){
+  const low=text.toLowerCase();const hits=[];
+  for(const [re,labels] of Object.entries(SKILLS)){
+    const parts=re.split('|');
+    if(parts.some(p=>low.includes(p)))hits.push(...labels);
+  }
+  return [...new Set(hits)];
+}
+$('#m-example').addEventListener('click',()=>{
+  $('#m-jd').value='岗位：前端开发工程师（校招）\n要求精通 HTML、CSS、JavaScript，熟悉 Vue 或 React 框架；了解工程化、Webpack；有 Git 使用经验；熟悉 HTTP 与浏览器原理；有性能优化经验加分；具备良好的代码规范和协作能力。';
+  $('#m-me').value='掌握 HTML、CSS、JavaScript，熟悉 Vue 与组件化开发，会用 Webpack 配置工程化项目，使用 Git 进行版本管理与团队协作，做过首屏加载性能优化（3s→1.2s）。';
+  toast('已填入示例');
+});
+$('#m-run').addEventListener('click',()=>{
+  const jd=$('#m-jd').value.trim(),me=$('#m-me').value.trim();
+  if(!jd||!me){toast('请先填好 JD 和我的技能');return;}
+  const need=collectJdSkills(jd);
+  const meLow=me.toLowerCase();
+  const hit=need.filter(k=>meLow.includes(k.toLowerCase()));
+  const miss=need.filter(k=>!meLow.includes(k.toLowerCase()));
+  const score=need.length?Math.round(hit.length/need.length*100):0;
+  $('#m-score').textContent=score+'%';
+  $('#m-hit').textContent=hit.length;
+  $('#m-miss').textContent=miss.length;
+  const hb=$('#m-hit-list'),mb=$('#m-miss-list');hb.innerHTML='';mb.innerHTML='';
+  hit.forEach(k=>{const t=document.createElement('span');t.className='tag ok';t.textContent=k;hb.appendChild(t);});
+  if(!hit.length)hb.innerHTML='<div class="hint">未命中任何 JD 中的技能关键词，建议核对是否粘贴了完整 JD / 简历要点。</div>';
+  miss.forEach(k=>{const t=document.createElement('span');t.className='tag miss';t.textContent=k;mb.appendChild(t);});
+  if(!miss.length)mb.innerHTML='<div class="hint">完美，JD 核心技能你都有覆盖 👏</div>';
+  // 建议
+  const adv=$('#m-adv');adv.innerHTML='';
+  const tips=[];
+  if(miss.length){
+    tips.push(`缺失项较多，建议优先补学最核心的 1-2 项（如 ${miss.slice(0,2).join('、')}），并在简历里补充一句相关实践。`);
+  }else{
+    tips.push('核心技能已全覆盖。面试前把命中项各准备 1 个真实项目例子，回答时主动引用。');
+  }
+  tips.push(score>=70?'匹配度较高，简历已具备竞争力，可在"项目经历"里进一步突出成果数字。':'匹配度偏低，建议按缺失技能量裁自己的简历版本，公司不同、简历不同。');
+  tips.push('把简历里最高频出现的 3 个关键词对齐到 JD 原词（如 JD 写"性能优化"就写"性能优化"），便于关键词检索。');
+  adv.innerHTML=tips.map(t=>'<li>'+t+'</li>').join('');
+  $('#m-out').classList.remove('hidden');
+  $('#m-out').scrollIntoView({behavior:'smooth'});
+});
+
+/* ============ 多岗位筛选 & 投递助手 ============ */
+const PS_CITIES=['北京','上海','广州','深圳','杭州','成都','武汉','南京','西安','苏州','天津','重庆','长沙','郑州','合肥','青岛','厦门','福州','济南','宁波','珠海','东莞','佛山','无锡','昆明','大连','南昌','哈尔滨','沈阳','太原','石家庄','泉州','南宁','贵阳','兰州','长春'];
+function psEsc(s){return (s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function psAddBox(){
+  const n=document.querySelectorAll('#ps-list textarea').length;
+  const box=document.createElement('div');box.style.cssText='margin-bottom:10px';
+  const ta=document.createElement('textarea');ta.style.cssText='min-height:76px';ta.name='txt';
+  ta.placeholder='第 '+(n+1)+' 条：从 BOSS APP「分享」复制文字卡片，或复制网页 JD 全文，粘贴到这里…';
+  const del=document.createElement('button');del.type='button';del.className='btn ghost sm';del.textContent='✕';del.style.cssText='float:right;margin-left:6px';
+  del.onclick=()=>{box.remove();if(!document.querySelectorAll('#ps-list textarea').length)psAddBox();};
+  box.appendChild(ta);box.appendChild(del);
+  return box;
+}
+function psParse(t){
+  const lines=t.replace(/\r/g,'').split('\n').map(s=>s.trim()).filter(Boolean);
+  const text=t;
+  const o={company:'',position:'',salary:'',city:'',hard:[]};
+  let p=lines.find(l=>/^(职位|岗位|招聘岗位|目标岗位)[：:]/.test(l));
+  if(!p){const m=text.match(/正在招聘[【\[（(]([^】\]）)]+)[】\]）)]/);p=m?m[1]:'';}
+  if(!p&&/岗位[：:]/.test(text)){const m=text.match(/岗位[：:][^\n]{2,22}/);p=m?m[0]:'';}
+  o.position=String(p||'').replace(/^(职位|岗位|招聘岗位|目标岗位)[：:]\s*/,'').replace('正在招聘','').trim().slice(0,24);
+  let c=lines.find(l=>/^(公司|企业)[：:]/.test(l));
+  if(!c){
+    const rec=lines.find(l=>/正在招聘/.test(l));
+    if(rec){const m=rec.match(/^([^【\[（(].+?)(?:正在招聘)/);c=m?m[1]:'';}
+  }
+  if(!c){
+    c=lines.find(l=>!/^[【\[]/.test(l)&&!/^(职位|岗位|薪资|薪酬|城市|地点|经验|学历|工作|任职|要求|职责|负责|发布|处理|ID)/.test(l)&&!/[·|、，,]/.test(l)&&l.length>=2&&l.length<=22);
+  }
+  o.company=String(c||'').replace(/^公司[：:]\s*/,'').replace(/正在招聘.*$/,'').trim().slice(0,20);
+  const sr=text.match(/(\d{2,3}(?:\.\d+)?)\s*[-~—－–]\s*(\d{2,3}(?:\.\d+)?)\s*[Kk千]/)||text.match(/(\d{2,3}(?:\.\d+)?)\s*[Kk千]\s*[-~—－–]\s*(\d{2,3}(?:\.\d+)?)/);
+  if(sr)o.salary=(sr[1]+'–'+sr[2]+'K');
+  else{const s=lines.find(l=>/薪资|薪酬|月薪/i.test(l));o.salary=String(s||'').replace(/^(薪资|薪酬|月薪)[：:]\s*/,'').slice(0,16);}
+  o.city=PS_CITIES.find(cd=>text.includes(cd))||'';
+  o.hard=lines.filter(l=>/本科|硕士|博士|专科|大专|经验|[1-9]-|年经验|全职|实习/.test(l)).slice(0,3).map(l=>l.replace(/[：:]\s*/,'：').slice(0,26));
+  return o;
+}
+function psVerdict(need,hit,hard,meLow){
+  const rate=need.length?Math.round(hit.length/need.length*100):0;
+  const hv=hard.join('');
+  let block=0;
+  if(/博士/.test(hv))block=2;else if(/硕士/.test(hv))block=1;
+  const hasEdu=/本科|硕士|博士|研究生|大专|专科/.test(meLow);
+  let v,c;
+  if(block===2&&!/硕士|博士|研究生/.test(meLow)){v='看情况(要求博士)';c='warn';}
+  else if(block>=1&&!hasEdu){v='看情况(有学历线)';c='warn';}
+  else if(rate>=60){v='建议投';c='ok';}
+  else if(rate>=35){v='看情况';c='warn';}
+  else if(need.length){v='不投(技能偏弱)';c='bad';}
+  else{v='看情况';c='warn';}
+  return {v,c,rate};
+}
+const PS_RANK={ok:2,warn:1,bad:0};
+$('#ps-add').addEventListener('click',()=>$('#ps-list').appendChild(psAddBox()));
+$('#ps-clear').addEventListener('click',()=>{const l=$('#ps-list');l.innerHTML='';l.appendChild(psAddBox());toast('已清空');});
+$('#ps-copy-bm').addEventListener('click',()=>copy($('#ps-bookmark').getAttribute('href').replace(/^javascript:/,'')));
+if(!document.querySelectorAll('#ps-list textarea').length)$('#ps-list').appendChild(psAddBox());
+$('#ps-run').addEventListener('click',()=>{
+  const me=$('#m-me').value.trim(),meLow=me.toLowerCase();
+  const rows=[];
+  document.querySelectorAll('#ps-list textarea').forEach(b=>{
+    const t=b.value.trim();if(!t)return;
+    const p=psParse(t);
+    const need=collectJdSkills(t);
+    const hit=need.filter(k=>meLow.includes(k.toLowerCase()));
+    rows.push({...p,need,hit,rd:psVerdict(need,hit,p.hard,meLow)});
+  });
+  if(!rows.length){toast('请先粘贴至少一条岗位信息');return;}
+  rows.sort((a,b)=>(PS_RANK[b.rd.c]||1)-(PS_RANK[a.rd.c]||1)||(b.rd.rate||0)-(a.rd.rate||0));
+  const tb=document.querySelector('#ps-table tbody');tb.innerHTML='';
+  rows.forEach((r,idx)=>{
+    const tr=document.createElement('tr');
+    const needs=r.need.map(k=>`<span class="tag ${r.hit.includes(k)?'ok':'miss'}">${psEsc(k)}</span>`).join('');
+    tr.innerHTML=`<td>${psEsc(r.company)||'—'}</td><td>${psEsc(r.position)||'—'}</td><td>${psEsc(r.salary)||'—'}</td><td>${psEsc(r.city)||'—'}</td><td style="font-size:11.5px;color:var(--ink-soft)">${psEsc(r.hard.join('；'))||'—'}</td><td>${needs||'<span class="hint">—</span>'}</td><td><span class="v-badge v-${r.rd.c}">${r.rd.v}</span></td><td class="no-wrap"><button class="btn ghost sm" data-job="${idx}">存公司库</button> <button class="btn ghost sm" data-track="${idx}">记投递</button></td>`;
+    tb.appendChild(tr);
+    tr.querySelector('[data-job]').onclick=()=>{
+      addCompany({name:r.company||'未命名公司',ind:'',size:'',city:r.city,pos:r.position,salary:r.salary,interview:'',diff:3,entry:'',note:'来源：岗位筛选'+(r.hard.length?(' · '+r.hard.join('；')):'')});
+      toast('已存入公司库（切到「公司信息」查看）');
+    };
+    tr.querySelector('[data-track]').onclick=()=>{
+      const rec={id:Date.now(),co:r.company||'未命名公司',pos:r.position,src:'筛选助手',date:today(),note:r.salary||'',status:0,updated:today(),hist:[{status:0,date:today()}]};
+      records.unshift(rec);saveRec();renderTrack();
+      toast('已记入投递状态（切到「求职记录」查看）');
+    };
+  });
+  $('#ps-out').classList.remove('hidden');
+  $('#ps-out').scrollIntoView({behavior:'smooth'});
+});
+
+/* ============ Tab 3 面试对话 ============ */
+$('#i-gen').addEventListener('click',()=>{
+  const edu=$('#i-edu').value.trim(),exp=$('#i-exp').value.trim(),skill=$('#i-skill').value.trim(),mot=$('#i-mot').value.trim();
+  if(!edu&&!exp){toast('至少填一下教育背景或经历');return;}
+  const len=$('#i-len').value;
+  const three=[
+    `面试官你好，我是${edu?edu.split(/，|,|\n/)[0]:''}的同学。下面用三分钟介绍一下自己。`,
+    edu?`教育背景：${edu}。`:`（教育背景可补充：${edu}）`,
+    exp?`经历方面：${exp}。`:'',
+    skill?`技能与优势：${skill}。`:'',
+    `如果用一句话概括，我是一个${skill||'基础和解决问题的能力'}比较扎实、做事看重结果的应届生。`,
+    mot?`关于求职动机：${mot}。`:'',
+    '很希望能加入贵团队，这个机会对我既是挑战也是成长。谢谢。',
+  ];
+  const one=[
+    `面试官好，我是${edu?edu.split(/，|,|\n/)[0]:''}的${exp?'同学':'应届生'}。`,
+    exp?`我在校期间主要做了：${exp.slice(0,60)}。`:`（经历：${exp||'待补充'}）`,
+    `我掌握${skill||'相关的基础技能'}，是一段比较扎实的成长经历。`,
+    '今天来是想深入了解这个岗位，也非常期待能有机会并肩合作。谢谢。',
+  ];
+  const script=(len==='3'?three:one).filter(l=>l&&!l.startsWith('（教育背景可补充）')&&!l.startsWith('（经历：')).join('\n');
+  $('#i-script').textContent=script;
+  $('#i-out').classList.remove('hidden');
+});
+$('#i-copy').addEventListener('click',()=>{const s=$('#i-script').textContent;s&&copy(s);});
+
+/* 高频问答库 */
+const QAS=[
+  {q:'请做个自我介绍',a:'结构：一句话定位（我是谁）→ 1-2 段最能证明能力的经历（带数字）→ 一句话动机。控制在 1-3 分钟，别说成长经历流水账。'},
+  {q:'为什么选择我们公司 / 这个岗位？',a:'分两层：①对公司：结合业务方向/产品/行业理解说；②对岗位：技能匹配 + 兴趣 + 想学的东西。别只说"离家近""名气大"。'},
+  {q:'你的优点 / 缺点是什么？',a:'优点：选与岗位相关的能力 + 一个具体事例佐证。缺点：说一个"愿意改、已在做改进"的非致命项（如：公开表达需练习，已参加社团分享），不要变相夸自己。'},
+  {q:'讲一个你最有成就感的项目',a:'用 STAR：背景 → 你的任务 → 你做了什么 → 结果数字 + 复盘。重点在"你的贡献"而非"团队做了什么"。'},
+  {q:'你的职业规划是什么？',a:'短期（1 年）：打好基础、跟上团队；中期：独立负责模块、沉淀能力。把规划锚定在"能为公司创造价值"上，别只谈升职加薪。'},
+  {q:'你如何看待加班？',a:'态度积极：项目急会让你全力配合，同时靠提高效率、提前规划来减少无效加班。切忌"无条件接受"或断然拒绝。'},
+  {q:'你最大的失败 / 挫折是什么？',a:'选一个真实但低风险的失败，用"当时的问题 → 我的复盘 → 我后来的改进"展现成长。切忌只倒苦水不反思。'},
+  {q:'你认为自己适合做这个岗位吗？',a:'从技能匹配、兴趣、投入证据（做过什么相关的事）三面论证适合。别只喊"我很愿意学"。'},
+  {q:'为什么你成绩 / 经历平平？',a:'坦诚但不贬低自己：突出你投入了时间的方向（项目/实践），并说明从中获得的、与岗位相关的能力。'},
+  {q:'反问环节：你有什么想问的？',a:'问团队、成长路径、业务目标等，体现诚意。例：这个岗位的核心产出是什么？团队当前最大的技术/业务挑战？避免只问薪资福利。'},
+  {q:'你了解 HTTP / 浏览器从输入 URL 到页面展示经历了什么？',a:'答题思路（技术面）：DNS 解析 → TCP 连接 → HTTP 请求 → 服务器返回 → HTML 解析 → 构建 DOM/CSSOM → 渲染。平时用这个串联讲。'},
+  {q:'怎样保证你写的代码质量？',a:'答题思路：代码规范、自测用例、Code Review、他人可读、关键路径测试；配合一个你真实做过的例子。'},
+];
+let qaFam={};
+if(localStorage.getItem('jh_qa_fam')){try{qaFam=JSON.parse(localStorage.getItem('jh_qa_fam'));}catch(_){qaFam={};}}
+function renderQA(){
+  const box=$('#i-qa');box.innerHTML='';
+  QAS.forEach((item,i)=>{
+    const fam=qaFam[i]||0;
+    const d=document.createElement('div');d.className='qa-item';
+    d.innerHTML=`
+      <div class="q">Q${i+1}. ${item.q}</div>
+      <div class="a">${item.a}</div>
+      <div class="ops">
+        <span class="hint" style="margin:0">熟练度：</span>
+        <span class="familiar">${[1,2,3,4].map(n=>`<span class="dot ${fam>=n?'on':''}" data-qa="${i}" data-lv="${n}"></span>`).join('')}</span>
+        <span style="margin-left:auto" class="hint">${['','不熟','勉强','较熟','很熟'][fam]||'未标记'}</span>
+      </div>`;
+    box.appendChild(d);
+  });
+  box.querySelectorAll('.dot').forEach(dot=>dot.addEventListener('click',()=>{
+    const i=+dot.dataset.qa,lv=+dot.dataset.lv;
+    qaFam[i]=qaFam[i]===lv?0:lv;
+    localStorage.setItem('jh_qa_fam',JSON.stringify(qaFam));
+    renderQA();renderProg();
+  }));
+}
+function renderProg(){
+  const done=QAS.filter((_,i)=>(qaFam[i]||0)>=3).length;
+  const pct=QAS.length?Math.round(done/QAS.length*100):0;
+  $('#i-prog').style.width=pct+'%';
+  $('#i-prog-txt').textContent=`${done} / ${QAS.length} 题已标记（≥3） · ${pct}%`;
+}
+$('#i-shuffle').addEventListener('click',()=>{
+  const box=$('#i-qa');const items=box.querySelectorAll('.qa-item');
+  if(!items.length)return;
+  const pick=items[Math.floor(Math.random()*items.length)];
+  pick.scrollIntoView({behavior:'smooth',block:'center'});
+  pick.style.border='2px solid var(--accent)';
+  setTimeout(()=>{pick.style.border='none';},2000);
+  toast('抽中一题，先自己答再对照思路');
+});
+renderQA();renderProg();
+
+/* ============ Tab 4 求职记录 ============ */
+let records=[];
+try{records=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(_){records=[];}
+const ST=['已投','笔试','一面','二面','Offer','结束'];
+const ST_CLS=['st-0','st-1','st-2','st-3','st-4','st-5'];
+function saveRec(){localStorage.setItem(KEY,JSON.stringify(records));}
+function today(){return new Date().toISOString().slice(0,10);}
+$('#t-add').addEventListener('click',()=>{
+  const co=$('#t-co').value.trim(),pos=$('#t-pos').value.trim(),src=$('#t-src').value.trim(),date=$('#t-date').value||today(),note=$('#t-note').value.trim();
+  if(!co){toast('请填公司名');return;}
+  const rec={id:Date.now(),co,pos,src,date,note,status:0,updated:today(),hist:[{status:0,date}]};
+  records.unshift(rec);saveRec();
+  $('#t-co').value='';$('#t-pos').value='';$('#t-src').value='';$('#t-date').value='';$('#t-note').value='';
+  renderTrack();toast('已新增投递记录');
+});
+function daysSince(ds){const t=new Date();const d=new Date(ds);return Math.floor((t-d)/86400000);}
+function renderTrack(){
+  $('#t-empty').classList.toggle('hidden',records.length>0);
+  $('#t-board').classList.toggle('hidden',records.length===0);
+  if(!records.length)return;
+  // stats
+  const st={};
+  records.forEach(r=>{st[r.status]=(st[r.status]||0)+1;});
+  const statsBox=$('#t-stats');statsBox.innerHTML='';
+  const defs=[['总数',records.length,'var(--accent)'],['已投',st[0]||0,'var(--blue)'],['进行中',(st[1]||0)+(st[2]||0)+(st[3]||0),'var(--orange)'],['Offer',st[4]||0,'var(--green)'],['结束',st[5]||0,'var(--red)']];
+  defs.forEach(d=>{const el=document.createElement('div');el.className='stat';el.innerHTML=`<div class="num" style="color:${d[2]}">${d[1]}</div><div class="lbl">${d[0]}</div>`;statsBox.appendChild(el);});
+  // stuck
+  const stuck=$('#t-stuck');stuck.innerHTML='';
+  const stuckOnes=records.filter(r=>r.status>0&&r.status<4&&daysSince(r.updated)>=STALE_DAYS);
+  if(stuckOnes.length){
+    stuck.innerHTML=`<div class="callout"><b>⚠ 卡住待跟进（≥${STALE_DAYS} 天未推进）</b>${stuckOnes.slice(0,5).map(r=>`${r.co}(${r.pos||'无岗位'})·${ST[r.status]}`).join('、')}${stuckOnes.length>5?' 等':''} —— 建议主动邮件/私信跟进一次。</div>`;
+  }else{
+    stuck.innerHTML=`<div class="callout"><b>✅ 最近都推进顺利，暂无卡住项。</b></div>`;
+  }
+  // table
+  const tb=$('#t-table tbody');tb.innerHTML='';
+  records.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><b>${r.co}</b></td>
+      <td>${r.pos||'-'}</td>
+      <td>${r.src||'-'}</td>
+      <td>${r.date}</td>
+      <td><span class="status-pill ${ST_CLS[r.status]}">${ST[r.status]}</span></td>
+      <td>${r.updated}${r.status>0&&r.status<4?`（${daysSince(r.updated)}天）`:''}</td>
+      <td>${r.note?r.note:'-'}</td>
+      <td>
+        ${r.status<5?`<button class="btn ghost sm" data-adv="${r.id}">${ST[r.status+1]} ›</button>`:''}
+        <button class="btn danger sm" data-del="${r.id}">删除</button>
+      </td>`;
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll('[data-adv]').forEach(b=>b.addEventListener('click',e=>{
+    const r=records.find(x=>x.id===+e.target.dataset.adv);if(!r)return;
+    const ns=r.status+1;r.status=ns;r.updated=today();r.hist.push({status:ns,date:today()});saveRec();renderTrack();toast('已推进到「'+ST[ns]+'」');
+  }));
+  tb.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',e=>{
+    const id=+e.target.dataset.del;
+    if(confirm('确认删除这条投递记录？')){
+      records=records.filter(x=>x.id!==id);saveRec();renderTrack();toast('已删除');
+    }
+  }));
+}
+$('#t-export').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='投递记录_'+today()+'.json';a.click();URL.revokeObjectURL(a.href);toast('已导出 JSON');
+});
+$('#t-import-btn').addEventListener('click',()=>$('#t-import').click());
+$('#t-import').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>{try{const arr=JSON.parse(rd.result);if(!Array.isArray(arr))throw 0;records=arr;saveRec();renderTrack();toast('导入成功 '+arr.length+' 条');}catch(_){toast('文件格式不对，请导入本工具导出的 JSON');}};
+  rd.readAsText(f);e.target.value='';
+});
+renderTrack();
+
+/* ============ Tab 5 JD 分析 ============ */
+function dedup(a){return a.filter((v,i)=>a.indexOf(v)===i);}
+function jdAnalyze(text){
+  const lines=text.split(/[\n；;。]+/).map(s=>s.trim()).filter(Boolean);
+  let duty=[],hard=[],plus=[],other=[];
+  lines.forEach(l=>{
+    if(/(本科|硕士|博士|学历|应届|毕业|经验|211|985|双一流)/.test(l)) hard.push(l);
+    else if(/(优先|加分|了解|更佳|具备者|有.*更好)/.test(l)) plus.push(l);
+    else if(/(负责|参与|职责|工作内容|开发|设计|优化|维护|对接|分析|支持|撰写|推动|完成|落地|需求|跟进)/.test(l)) duty.push(l);
+    else other.push(l);
+  });
+  const low=text.toLowerCase();
+  function inText(lbl){
+    if(!lbl)return false;
+    const L=lbl.toLowerCase();
+    if(/[a-z]/.test(L)){
+      if(/[\u4e00-\u9fff]/.test(L))return low.includes(L);
+      try{return new RegExp('(^|[^a-z0-9])'+L.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z0-9]|$)','i').test(low);}catch(_){return low.includes(L);}
+    }
+    return low.includes(L);
+  }
+  const kws=new Set();
+  Object.values(SKILLS).flat().forEach(k=>{if(inText(k))kws.add(k);});
+  TECH_WORDS.forEach(w=>{if(inText(w))kws.add(w);});
+  const salary=[];
+  let re=/(\d+(\.\d+)?)\s*[-~—至到]\s*(\d+(\.\d+)?)\s*[kKk]/g,m;
+  while((m=re.exec(text)))salary.push(`${m[1]}k-${m[3]}k`);
+  re=/年薪\s*(\d+(\.\d+)?)\s*万/g;
+  while((m=re.exec(text)))salary.push(m[0]);
+  re=/(\d+(\.\d+)?)\s*(-|~|到)\s*(\d+(\.\d+)?)\s*万/g;
+  while((m=re.exec(text))&&salary.length<4)salary.push(`${m[1]}万-${m[3]}万`);
+  return {duty:dedup(duty).slice(0,8),hard:dedup(hard).slice(0,8),plus:dedup(plus).slice(0,8),kws:[...kws].slice(0,12),salary:[...new Set(salary)].slice(0,4)};
+}
+$('#jd-example').addEventListener('click',()=>{
+  $('#jd-co').value='某科技有限公司';
+  $('#jd-title').value='前端开发实习生';
+  $('#jd-text').value='职位描述：\n1. 负责公司后台管理系统的前端开发与维护，参与 UI 组件设计与调研，推动性能优化；\n2. 对接产品与后端，按需求推动功能落地。\n任职要求：\n- 本科及以上学历，计算机相关专业优先；\n- 熟练掌握 HTML、CSS、JavaScript，了解 Vue 或 React；\n- 熟悉 HTTP、浏览器原理与工程化（Webpack）者加分；\n- 具备良好的代码规范和沟通协作能力。\n薪资：200-250 元/天。';
+  toast('已填入示例 JD');
+});
+$('#jd-run').addEventListener('click',()=>{
+  const text=$('#jd-text').value.trim();
+  if(!text){toast('请先粘贴 JD 全文');return;}
+  const r=jdAnalyze(text);
+  const put=(el,arr)=>$(el).innerHTML=arr.length?arr.map(x=>'<li>'+x+'</li>').join(''):'<li>未识别到相关条目</li>';
+  put('#jd-duty',r.duty);put('#jd-hard',r.hard);put('#jd-plus',r.plus);
+  const kw=$('#jd-kw');kw.innerHTML=r.kws.length?r.kws.map(k=>'<span class="tag soft">'+k+'</span>').join(''):'<span class="hint">未识别出明确技能关键词</span>';
+  $('#jd-salary').innerHTML=r.salary.length?('概见薪资：<b>'+r.salary.join('、')+'</b>（从 JD 文本中提取，若非月薪单位请以官方为准）'):'本 JD 未直接给出薪资，建议投递前向 HR 确认区间。';
+  const list=$('#jd-check');const items=[];
+  items.push('硬性门槛：'+(r.hard.length?('是否逐条满足？含「'+r.hard[0].slice(0,18)+'…」'):'无明确的学历/经验硬门槛'));
+  items.push('技能匹配：是否掌握 JD 高频关键词（'+((r.kws.slice(0,4).join('、'))||'未识别')+'）？缺的在面试前补一句相关实践。');
+  items.push('行动：提前 1 项能证明相关能力的项目经历，反问环节用得上。');
+  list.innerHTML=items.map(x=>'<li>'+x+'</li>').join('');
+  $('#jd-out').classList.remove('hidden');
+  window._jdResult=r;
+  toast('分析完成');
+});
+$('#jd-saveco').addEventListener('click',()=>{
+  const r=window._jdResult;const name=$('#jd-co').value.trim();
+  if(!name){toast('请先填公司名');return;}
+  addCompany({name,ind:'',size:'',city:'',pos:$('#jd-title').value.trim(),salary:r.salary.join('、'),interview:'',diff:3,entry:'',note:'JD关键词：'+(r.kws.join('、')||'—')});
+  toast('已存入公司信息');
+});
+
+/* ============ Tab 6 Offer 对比 ============ */
+let offers=[];try{offers=JSON.parse(localStorage.getItem('jh_offers')||'[]');}catch(_){offers=[];}
+let offerEditId=null;
+function saveOffers(){localStorage.setItem('jh_offers',JSON.stringify(offers));}
+const CITY_SCORE={'北京':4,'上海':4.5,'广州':3.5,'深圳':3.5,'杭州':4.5,'南京':4,'苏州':4,'成都':4.5,'武汉':4,'西安':3.5,'天津':3.5,'重庆':4,'长沙':4};
+function calcOffer(o){
+  const base=+o.base||0,mid=+o.mid||0,sign=+o.sign||0,stock=+o.stock||0,allow=+o.allow||0;
+  const yearly=base*12+base*mid+sign/3+stock*10000+allow*12;
+  const dayH=8+(Math.min(5,Math.max(1,+o.ovt||3))-1)*0.75;
+  const yearH=21.75*12*dayH;
+  return {yearly,hourly:yearH?yearly/yearH:0};
+}
+function collectOffers(){
+  return offers.map(o=>({...o,id:o.id, ...calcOffer(o)}));
+}
+function scopedValues(monthlyOffers){
+  const ymax=Math.max(...monthlyOffers.map(o=>o.yearly),1);
+  return {ymax};
+}
+function scoreOne(o,s){
+  const sv=o.yearly/s.ymax;
+  const gv=((+o.growth||1)-1)/4;
+  const cv=((CITY_SCORE[(o.city||'').trim()]||3)-1)/4;
+  const ovv=(5-(+o.ovt||3))/4;
+  const cmv=Math.max(0,1-(o.commute||0)/180);
+  const stv=((+o.stab||1)-1)/4;
+  return {sv,gv,cv,ovv,cmv,stv};
+}
+function renderOffers(showScore){
+  const mo=collectOffers();const s=scopedValues(mo);
+  const w={salary:+$('.w-in[data-w=salary]').value||0,growth:+$('.w-in[data-w=growth]').value||0,city:+$('.w-in[data-w=city]').value||0,overtime:+$('.w-in[data-w=overtime]').value||0,commute:+$('.w-in[data-w=commute]').value||0,stab:+$('.w-in[data-w=stab]').value||0};
+  if(showScore&&mo.length){
+    const scored=mo.map(o=>{const v=scoreOne(o,s);const sum=(v.sv*w.salary)+(v.gv*w.growth)+(v.cv*w.city)+(v.ovv*w.overtime)+(v.cmv*w.commute)+(v.stv*w.stab);const wsum=Object.values(w).reduce((a,b)=>a+b,0);o.score=wsum?Math.round(sum/wsum*100):0;return o;});
+    scored.sort((a,b)=>b.score-a.score);
+    mo.length=0;mo.push(...scored);
+  }
+  $('#o-empty').classList.toggle('hidden',mo.length>0);
+  $('#o-board').classList.toggle('hidden',mo.length===0);
+  if(!mo.length)return;
+  const head=['公司 / 岗位','城市','Base','年终','估算年薪','参考时薪','加班','通勤','成长','稳定','签约/股票','得分','操作'];
+  $('#o-thead').innerHTML='<tr>'+head.map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  const tb=$('#o-table tbody');tb.innerHTML='';
+  mo.forEach(o=>{
+    const hr=o.hourly?'¥'+(o.hourly/1000).toFixed(1)+'k/时':'--';
+    const yr=o.yearly?('¥'+(o.yearly/10000).toFixed(1)+'万'):'--';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><b>${o.co}</b><div class="hint" style="margin:0">${o.pos||''}</div>${o.note?'<div class="hint" style="margin:0">'+o.note+'</div>':''}</td>
+      <td>${o.city||'-'}</td><td class="num-r">${o.base||'-'}</td><td class="num-r">${o.mid||'0'}个月</td>
+      <td class="num-r"><b>${yr}</b></td><td class="num-r">${hr}</td>
+      <td>${'⭐'.repeat(+o.ovt||0)}</td><td class="num-r">${o.commute||'-'}分</td>
+      <td>${o.growth||'-'}</td><td>${o.stab||'-'}</td><td class="num-r">${(+o.sign?('¥'+(o.sign/10000).toFixed(1)+'万'):'')||''}${(+o.stock?('+'+(+o.stock).toFixed(1)+'万'):'')||'—'}</td>
+      <td class="ov-score">${o.score!=null?o.score+'(加权)':'点击计算'}</td>
+      <td><button class="btn ghost sm" data-oedit="${o.id}">改</button><button class="btn danger sm" data-odel="${o.id}">删</button></td>`;
+    tb.appendChild(tr);
+  });
+  const rec=$('#o-reco');
+  if(showScore&&mo.length){const top=mo[0];rec.innerHTML=`<div class="callout"><b>当前按你的权重，最推荐</b>${top.co}（加权 ${top.score} 分）。薪资只是参考，请再结合稳定性、城市与长期成长做决定。</div>`;}
+  else rec.innerHTML='';
+  tb.querySelectorAll('[data-oedit]').forEach(b=>b.addEventListener('click',()=>loadOfferEdit(+b.dataset.oedit)));
+  tb.querySelectorAll('[data-odel]').forEach(b=>b.addEventListener('click',()=>{offers=offers.filter(x=>x.id!==+b.dataset.odel);saveOffers();renderOffers(false);toast('已删除');}));
+}
+function loadOfferEdit(id){
+  const o=offers.find(x=>x.id===id);if(!o)return;
+  offerEditId=id;
+  $('#o-co').value=o.co||'';$('#o-pos').value=o.pos||'';$('#o-city').value=o.city||'';$('#o-base').value=o.base||'';
+  $('#o-mid').value=o.mid||'';$('#o-sign').value=o.sign||'';$('#o-stock').value=o.stock||'';$('#o-fund').value=o.fund||'';
+  $('#o-allow').value=o.allow||'';$('#o-overtime').value=o.ovt||3;$('#o-commute').value=o.commute||'';
+  $('#o-growth').value=o.growth||3;$('#o-stab').value=o.stab||3;$('#o-note').value=o.note||'';
+  $('#o-add').textContent='保存修改';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('#o-add').addEventListener('click',()=>{
+  const co=$('#o-co').value.trim();if(!co){toast('请填公司名');return;}
+  const wasEdit=!!offerEditId;
+  const data={co,pos:$('#o-pos').value.trim(),city:$('#o-city').value.trim(),
+    base:$('#o-base').value,mid:$('#o-mid').value,sign:$('#o-sign').value,stock:$('#o-stock').value,fund:$('#o-fund').value,
+    allow:$('#o-allow').value,ovt:+$('#o-overtime').value,commute:$('#o-commute').value,
+    growth:+$('#o-growth').value,stab:+$('#o-stab').value,note:$('#o-note').value.trim()};
+  if(offerEditId){offers=offers.map(x=>x.id===offerEditId?{...x,...data}:x);offerEditId=null;}
+  else{data.id=Date.now();offers.push(data);}
+  saveOffers();renderOffers(false);
+  ['#o-co','#o-pos','#o-city','#o-base','#o-mid','#o-sign','#o-stock','#o-fund','#o-allow','#o-commute','#o-note'].forEach(s=>$(s).value='');
+  $('#o-overtime').value=3;$('#o-growth').value=3;$('#o-stab').value=3;$('#o-add').textContent='添加 Offer';
+  toast(wasEdit?'已更新':'已添加 Offer');
+});
+$('#o-example').addEventListener('click',()=>{
+  $('#o-co').value='字节跳动（示例A）';$('#o-pos').value='后端开发';$('#o-city').value='北京';$('#o-base').value='20000';$('#o-mid').value='3';$('#o-sign').value='20000';$('#o-stock').value='8';$('#o-fund').value='12';$('#o-allow').value='1000';$('#o-overtime').value='4';$('#o-commute').value='70';$('#o-growth').value=5;$('#o-stab').value=3;$('#o-note').value='示例，请改成你的真实 Offer';
+  toast('已填入示例 A，点「添加 Offer」后再改公司名加 B');
+});
+$('#o-score').addEventListener('click',()=>{renderOffers(true);toast('已按当前权重重新排序');});
+$('#o-rm').addEventListener('click',()=>{if(confirm('清空全部 Offer？')){offers=[];saveOffers();renderOffers(false);toast('已清空');}});
+$('#o-export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(offers,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Offer对比.json';a.click();URL.revokeObjectURL(a.href);toast('已导出');});
+$('#o-import-btn').addEventListener('click',()=>$('#o-import').click());
+$('#o-import').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const a=JSON.parse(r.result);if(!Array.isArray(a))throw 0;offers=a;saveOffers();renderOffers(false);toast('导入 '+a.length+' 条');}catch(_){toast('格式不对');}};r.readAsText(f);e.target.value='';});
+renderOffers(false);
+
+/* ============ Tab 7 公司信息整理 ============ */
+let comps=[];try{comps=JSON.parse(localStorage.getItem('jh_companies')||'[]');}catch(_){comps=[];}
+let compEditId=null;
+function saveComps(){localStorage.setItem('jh_companies',JSON.stringify(comps));}
+function addCompany(fields){comps.push({id:Date.now(),...fields,diff:+fields.diff||3,date:today()});saveComps();renderComps();}
+function renderComps(){
+  const kw=$('#c-search').value.trim().toLowerCase();
+  const ind=$('#c-filter').value;
+  let list=comps.slice();
+  if(kw)list=list.filter(c=>(c.name+' '+c.pos+' '+c.city+' '+c.note+' '+c.ind).toLowerCase().includes(kw));
+  if(ind)list=list.filter(c=>c.ind===ind);
+  const opts=[''];comps.forEach(c=>{if(c.ind&&!opts.includes(c.ind))opts.push(c.ind);});
+  const filt=$('#c-filter');const cur=ind;filt.innerHTML=opts.map(o=>`<option value="${o}">${o?('行业：'+o):'全部行业'}</option>`).join('');filt.value=cur;
+  $('#c-empty').style.display=list.length?'none':'block';
+  const box=$('#c-list');box.innerHTML='';
+  list.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  list.forEach(c=>{
+    const el=document.createElement('div');el.className='comp-card';
+    el.innerHTML=`
+      <div class="head"><b>${c.name}</b><span class="diff-pill">难度 ${'★'.repeat(Math.min(5,c.diff||3))}</span><span class="hint">${c.date||''}</span></div>
+      <div class="meta">${[c.ind,c.size,c.city,c.pos].filter(Boolean).join(' · ')||'未填写基本信息'}</div>
+      ${c.salary?`<div class="meta">💰 ${c.salary}</div>`:''}
+      ${c.interview?`<div class="meta">🗒 ${c.interview}</div>`:''}
+      ${c.entry?`<div class="meta">🔗 ${c.entry}</div>`:''}
+      ${c.note?`<div class="meta">📌 ${c.note}</div>`:''}
+      <div class="ops"><button class="btn ghost sm" data-cedit="${c.id}">编辑</button><button class="btn danger sm" data-cdel="${c.id}">删除</button></div>`;
+    box.appendChild(el);
+  });
+  box.querySelectorAll('[data-cedit]').forEach(b=>b.addEventListener('click',()=>loadCompEdit(+b.dataset.cedit)));
+  box.querySelectorAll('[data-cdel]').forEach(b=>b.addEventListener('click',()=>{if(confirm('删除该公司？')){comps=comps.filter(x=>x.id!==+b.dataset.cdel);saveComps();renderComps();toast('已删除');}}));
+}
+function loadCompEdit(id){
+  const c=comps.find(x=>x.id===id);if(!c)return;
+  compEditId=id;
+  $('#c-name').value=c.name||'';$('#c-ind').value=c.ind||'';$('#c-size').value=c.size||'';$('#c-city').value=c.city||'';
+  $('#c-pos').value=c.pos||'';$('#c-salary').value=c.salary||'';$('#c-interview').value=c.interview||'';$('#c-diff').value=c.diff||3;
+  $('#c-entry').value=c.entry||'';$('#c-note').value=c.note||'';
+  $('#c-add').textContent='保存修改';$('#c-cancel').style.display='inline-block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('#c-add').addEventListener('click',()=>{
+  const name=$('#c-name').value.trim();if(!name){toast('请填公司名称');return;}
+  const wasEdit=!!compEditId;
+  const data={name,ind:$('#c-ind').value.trim(),size:$('#c-size').value.trim(),city:$('#c-city').value.trim(),pos:$('#c-pos').value.trim(),salary:$('#c-salary').value.trim(),interview:$('#c-interview').value.trim(),diff:+$('#c-diff').value,entry:$('#c-entry').value.trim(),note:$('#c-note').value.trim()};
+  if(compEditId){comps=comps.map(x=>x.id===compEditId?{...x,...data}:x);compEditId=null;}
+  else{data.date=today();data.id=Date.now();comps.push(data);}
+  saveComps();renderComps();clearCompForm();toast(wasEdit?'已更新':'已新增');
+});
+function clearCompForm(){['#c-name','#c-ind','#c-size','#c-city','#c-pos','#c-salary','#c-interview','#c-entry','#c-note'].forEach(s=>$(s).value='');$('#c-diff').value=3;$('#c-add').textContent='新增公司';$('#c-cancel').style.display='none';}
+$('#c-cancel').addEventListener('click',()=>{compEditId=null;clearCompForm();});
+$('#c-search').addEventListener('input',renderComps);
+$('#c-filter').addEventListener('change',renderComps);
+$('#c-export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(comps,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='公司信息.json';a.click();URL.revokeObjectURL(a.href);toast('已导出');});
+$('#c-import-btn').addEventListener('click',()=>$('#c-import').click());
+$('#c-import').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const a=JSON.parse(r.result);if(!Array.isArray(a))throw 0;comps=a;saveComps();renderComps();toast('导入 '+a.length+' 条');}catch(_){toast('格式不对');}};r.readAsText(f);e.target.value='';});
+renderComps();
+</script>
+</body>
+</html>
