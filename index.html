@@ -155,6 +155,147 @@
   @media(max-width:680px){.grid2{grid-template-columns:1fr}}
   footer.appfoot{margin-top:34px;text-align:center;color:var(--ink-soft);font-size:12.5px}
   footer.appfoot .pit{font-size:12px;color:var(--accent-ink);background:var(--accent-soft);display:inline-block;padding:6px 12px;border-radius:20px;margin-top:8px}
+
+/* ============ 简历模板生成器 ============ */
+.tpl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+.tpl-card{border:2px solid var(--line);border-radius:10px;padding:8px;cursor:pointer;transition:.15s;background:var(--bg-soft)}
+.tpl-card:hover{border-color:var(--accent)}
+.tpl-card.active{border-color:var(--accent);background:var(--accent-soft)}
+.tpl-preview{height:100px;background:#fff;border-radius:6px;position:relative;overflow:hidden;padding:8px;display:flex;flex-direction:column;gap:5px}
+.tpl-title{text-align:center;font-size:12.5px;font-weight:600;margin-top:6px;color:var(--ink)}
+.tpl-name{font-size:11px;font-weight:700;text-align:center;margin-top:2px}
+.tpl-bar{height:4px;background:var(--accent);border-radius:2px;margin:2px 8px}
+.tpl-bar.sm{height:3px;width:40%}
+.tpl-line{height:3px;background:#ddd;border-radius:2px;margin:0 8px}
+.tpl-line.short{width:60%}
+.tpl-modern-preview .tpl-side{position:absolute;left:0;top:0;bottom:0;width:30%;background:var(--blue)}
+.tpl-name-right{font-size:11px;font-weight:700;margin-left:34%;margin-top:4px}
+.tpl-line-right{height:3px;background:#ddd;border-radius:2px;margin-left:34%;margin-right:8px}
+.tpl-line-right.short{width:40%}
+.tpl-creative-preview .tpl-head{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.tpl-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#b0783a,#d9a45f)}
+.tpl-name-creative{font-size:10px;font-weight:700}
+.tpl-line-c{height:3px;background:#ddd;border-radius:2px;margin:0 2px}
+.tpl-line-c.short{width:60%}
+.tpl-tech-preview{background:#1a1a2e;color:#0f0;font-family:monospace}
+.tpl-tech-head{font-size:9px;font-weight:700;letter-spacing:1px;text-align:center;color:#0f0;margin-top:2px}
+.tpl-tech-bar{height:3px;background:#0f0;border-radius:2px;margin:3px 8px;opacity:.8}
+.tpl-tech-tag{display:inline-block;width:30px;height:12px;background:#0f0;opacity:.2;border-radius:3px;margin-left:8px}
+.tpl-tech-preview .tpl-line{background:#0f0;opacity:.3}
+
+.cv-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cv-form-col{min-width:0}
+.cv-preview-col{min-width:0}
+@media(max-width:960px){.cv-form-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.tpl-grid{grid-template-columns:repeat(2,1fr)}}
+
+.cv-preview-wrap{background:var(--bg-soft);border-radius:10px;padding:12px;max-height:800px;overflow-y:auto;border:1px solid var(--line)}
+.cv-page{background:#fff;min-height:800px;padding:0;box-shadow:0 2px 10px rgba(0,0,0,.08);font-size:13px;line-height:1.6;color:#333;position:relative;overflow:hidden}
+
+/* 经典简约模板 */
+.cv-page.tpl-classic{padding:40px 45px}
+.cv-page.tpl-classic .cv-header{text-align:center;border-bottom:2px solid #333;padding-bottom:18px;margin-bottom:20px}
+.cv-page.tpl-classic .cv-header h1{margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:2px}
+.cv-page.tpl-classic .cv-header .cv-target{font-size:14px;color:#666;margin-bottom:8px}
+.cv-page.tpl-classic .cv-header .cv-contact{font-size:12px;color:#666;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.cv-page.tpl-classic .cv-section{margin-bottom:18px}
+.cv-page.tpl-classic .cv-section h2{font-size:15px;font-weight:700;border-bottom:1px solid #ccc;padding-bottom:4px;margin:0 0 10px;letter-spacing:1px}
+.cv-page.tpl-classic .cv-edu-item,.cv-page.tpl-classic .cv-exp-item{margin-bottom:12px}
+.cv-page.tpl-classic .cv-item-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.cv-page.tpl-classic .cv-item-head .cv-item-title{font-weight:700;font-size:13.5px}
+.cv-page.tpl-classic .cv-item-head .cv-item-date{font-size:12px;color:#666}
+.cv-page.tpl-classic .cv-item-sub{font-size:12.5px;color:#555;margin-bottom:4px}
+.cv-page.tpl-classic .cv-item-desc{margin:0;padding-left:18px;font-size:12.5px}
+.cv-page.tpl-classic .cv-item-desc li{margin-bottom:3px}
+.cv-page.tpl-classic .cv-skills-list{margin:0;padding-left:18px;font-size:12.5px}
+.cv-page.tpl-classic .cv-skills-list li{margin-bottom:3px}
+
+/* 现代双色模板 */
+.cv-page.tpl-modern{display:grid;grid-template-columns:200px 1fr;min-height:900px}
+.cv-page.tpl-modern .cv-sidebar{background:var(--blue);color:#fff;padding:35px 20px}
+.cv-page.tpl-modern .cv-sidebar h1{font-size:22px;margin:0 0 4px;font-weight:700}
+.cv-page.tpl-modern .cv-sidebar .cv-target{font-size:13px;opacity:.9;margin-bottom:20px}
+.cv-page.tpl-modern .cv-sidebar .cv-side-section{margin-bottom:22px}
+.cv-page.tpl-modern .cv-sidebar h3{font-size:13px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:4px;margin:0 0 10px;letter-spacing:1px}
+.cv-page.tpl-modern .cv-sidebar .cv-contact-item{font-size:11.5px;margin-bottom:6px;opacity:.9}
+.cv-page.tpl-modern .cv-sidebar .cv-skills-list{margin:0;padding-left:16px;font-size:11.5px}
+.cv-page.tpl-modern .cv-sidebar .cv-skills-list li{margin-bottom:4px}
+.cv-page.tpl-modern .cv-main{padding:35px 30px;background:#fff}
+.cv-page.tpl-modern .cv-section{margin-bottom:20px}
+.cv-page.tpl-modern .cv-section h2{font-size:15px;font-weight:700;color:var(--blue);border-left:4px solid var(--blue);padding-left:10px;margin:0 0 12px}
+.cv-page.tpl-modern .cv-edu-item,.cv-page.tpl-modern .cv-exp-item{margin-bottom:14px}
+.cv-page.tpl-modern .cv-item-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.cv-page.tpl-modern .cv-item-head .cv-item-title{font-weight:700;font-size:13.5px;color:#333}
+.cv-page.tpl-modern .cv-item-head .cv-item-date{font-size:12px;color:#888}
+.cv-page.tpl-modern .cv-item-sub{font-size:12.5px;color:#666;margin-bottom:5px;font-style:italic}
+.cv-page.tpl-modern .cv-item-desc{margin:0;padding-left:18px;font-size:12.5px;color:#444}
+.cv-page.tpl-modern .cv-item-desc li{margin-bottom:4px}
+
+/* 创意排版模板 */
+.cv-page.tpl-creative{padding:0}
+.cv-page.tpl-creative .cv-creative-head{background:linear-gradient(135deg,#b0783a,#d9a45f);color:#fff;padding:40px 45px 35px;position:relative}
+.cv-page.tpl-creative .cv-creative-head::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:8px;background:repeating-linear-gradient(45deg,#b0783a,#b0783a 10px,#d9a45f 10px,#d9a45f 20px)}
+.cv-page.tpl-creative .cv-creative-head h1{font-size:30px;margin:0 0 6px;font-weight:700;letter-spacing:3px}
+.cv-page.tpl-creative .cv-creative-head .cv-target{font-size:15px;opacity:.95;margin-bottom:14px}
+.cv-page.tpl-creative .cv-creative-head .cv-contact{font-size:12.5px;display:flex;gap:16px;flex-wrap:wrap;opacity:.95}
+.cv-page.tpl-creative .cv-body{padding:30px 45px 40px}
+.cv-page.tpl-creative .cv-section{margin-bottom:20px}
+.cv-page.tpl-creative .cv-section h2{font-size:15px;font-weight:700;color:var(--accent-ink);display:flex;align-items:center;gap:8px;margin:0 0 12px}
+.cv-page.tpl-creative .cv-section h2::before{content:'';width:4px;height:16px;background:var(--accent);border-radius:2px}
+.cv-page.tpl-creative .cv-edu-item,.cv-page.tpl-creative .cv-exp-item{margin-bottom:14px;padding-left:14px;border-left:2px solid var(--accent-soft);position:relative}
+.cv-page.tpl-creative .cv-edu-item::before,.cv-page.tpl-creative .cv-exp-item::before{content:'';position:absolute;left:-6px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px var(--accent)}
+.cv-page.tpl-creative .cv-item-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.cv-page.tpl-creative .cv-item-head .cv-item-title{font-weight:700;font-size:13.5px;color:#333}
+.cv-page.tpl-creative .cv-item-head .cv-item-date{font-size:12px;color:#999;background:var(--accent-soft);padding:2px 8px;border-radius:10px}
+.cv-page.tpl-creative .cv-item-sub{font-size:12.5px;color:#666;margin-bottom:5px}
+.cv-page.tpl-creative .cv-item-desc{margin:0;padding-left:18px;font-size:12.5px;color:#444}
+.cv-page.tpl-creative .cv-item-desc li{margin-bottom:4px}
+.cv-page.tpl-creative .cv-skills-list{margin:0;padding-left:18px;font-size:12.5px;color:#444;display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.cv-page.tpl-creative .cv-skills-list li{margin-bottom:2px}
+
+/* 极客技术模板 */
+.cv-page.tpl-tech{background:#0d1117;color:#c9d1d9;font-family:'Consolas','Monaco','Courier New',monospace}
+.cv-page.tpl-tech .cv-tech-header{background:#161b22;border-bottom:1px solid #30363d;padding:30px 40px}
+.cv-page.tpl-tech .cv-tech-header::before{content:'// RESUME.TXT';display:block;font-size:11px;color:#8b949e;margin-bottom:8px}
+.cv-page.tpl-tech .cv-tech-header h1{font-size:26px;margin:0 0 4px;font-weight:700;color:#58a6ff;font-family:inherit}
+.cv-page.tpl-tech .cv-tech-header .cv-target{font-size:13px;color:#7ee787;margin-bottom:10px}
+.cv-page.tpl-tech .cv-tech-header .cv-target::before{content:'const position = ';color:#8b949e}
+.cv-page.tpl-tech .cv-tech-header .cv-target::after{content:';';color:#8b949e}
+.cv-page.tpl-tech .cv-tech-header .cv-contact{font-size:12px;color:#8b949e;display:flex;gap:14px;flex-wrap:wrap}
+.cv-page.tpl-tech .cv-tech-body{padding:25px 40px 35px}
+.cv-page.tpl-tech .cv-section{margin-bottom:20px}
+.cv-page.tpl-tech .cv-section h2{font-size:14px;font-weight:700;color:#d2a8ff;margin:0 0 10px;font-family:inherit}
+.cv-page.tpl-tech .cv-section h2::before{content:'## ';color:#6e7681}
+.cv-page.tpl-tech .cv-edu-item,.cv-page.tpl-tech .cv-exp-item{margin-bottom:14px;padding:10px 12px;background:#161b22;border:1px solid #30363d;border-radius:6px}
+.cv-page.tpl-tech .cv-item-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.cv-page.tpl-tech .cv-item-head .cv-item-title{font-weight:700;font-size:13px;color:#79c0ff}
+.cv-page.tpl-tech .cv-item-head .cv-item-title::before{content:'> ';color:#3fb950}
+.cv-page.tpl-tech .cv-item-head .cv-item-date{font-size:11.5px;color:#8b949e}
+.cv-page.tpl-tech .cv-item-sub{font-size:12px;color:#d2a8ff;margin-bottom:6px}
+.cv-page.tpl-tech .cv-item-desc{margin:0;padding-left:16px;font-size:12px;color:#c9d1d9}
+.cv-page.tpl-tech .cv-item-desc li{margin-bottom:3px}
+.cv-page.tpl-tech .cv-item-desc li::marker{color:#3fb950}
+.cv-page.tpl-tech .cv-skills-list{margin:0;padding-left:16px;font-size:12px;color:#c9d1d9;display:flex;flex-wrap:wrap;gap:6px;list-style:none}
+.cv-page.tpl-tech .cv-skills-list li{background:#21262d;padding:3px 10px;border-radius:4px;border:1px solid #30363d;font-size:11.5px}
+.cv-page.tpl-tech .cv-awards-list{margin:0;padding-left:16px;font-size:12px;color:#c9d1d9}
+.cv-page.tpl-tech .cv-awards-list li{margin-bottom:3px}
+.cv-page.tpl-tech .cv-summary{background:#161b22;border-left:3px solid #3fb950;padding:10px 14px;font-size:12px;color:#c9d1d9;border-radius:0 6px 6px 0}
+
+.cv-edu-entry,.cv-exp-entry{background:var(--bg-soft);border-radius:8px;padding:12px;margin-bottom:10px;border:1px solid var(--line)}
+.cv-edu-entry .entry-head,.cv-exp-entry .entry-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cv-edu-entry .entry-title,.cv-exp-entry .entry-title{font-weight:600;font-size:13px}
+.cv-edu-entry .entry-ops,.cv-exp-entry .entry-ops{display:flex;gap:4px}
+.cv-edu-entry .entry-ops button,.cv-exp-entry .entry-ops button{border:none;background:transparent;cursor:pointer;color:var(--ink-soft);font-size:14px;padding:2px 6px;border-radius:5px}
+.cv-edu-entry .entry-ops button:hover,.cv-exp-entry .entry-ops button:hover{background:var(--accent-soft);color:var(--accent-ink)}
+.cv-edu-entry .grid2,.cv-exp-entry .grid2{gap:8px}
+.cv-exp-entry textarea{min-height:70px}
+
+@media print{
+  body *{visibility:hidden}
+  #cv-preview,#cv-preview *{visibility:visible}
+  #cv-preview{position:absolute;left:0;top:0;width:100%;box-shadow:none}
+  @page{margin:0}
+}
 </style>
 </head>
 <body>
@@ -236,6 +377,84 @@
       <p class="sub">把下面的提示词粘给 TraeCode 或任何生成式 AI，可让亮点进一步升级。</p>
       <code class="prompt" id="p1">我正在准备校招简历。请把我下面这段项目经历，改写成 3 条紧凑、可量化的简历亮点，每条都用「动词 + 成果数字」开头，避免空泛形容词，总字数控制在每条 40 字以内。\n项目经历：{在这里粘贴你的描述}</code>
       <code class="prompt" id="p2">我投的是「前端工程师」岗。请基于下面这段经历，重点向我这个岗位靠拢：把与技术栈无关的表述弱化，突出组件化、性能优化、工程化与协作能力，同时补齐我认为缺的量化数据。\n经历：{粘贴}</code>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="col"><h2>📄 简历模板生成器</h2></div>
+        <div style="margin-left:auto">
+          <button class="btn ghost sm" id="cv-example">填入示例</button>
+          <button class="btn ghost sm" id="cv-clear">清空</button>
+        </div>
+      </div>
+      <p class="sub">选一个喜欢的模板，填写你的信息，一键生成可打印、可导出的电子版简历。所有数据仅保存在本地浏览器。</p>
+
+      <div style="margin-bottom:16px">
+        <label>选择简历模板</label>
+        <div class="tpl-grid" id="cv-tpl-grid">
+          <div class="tpl-card active" data-tpl="classic">
+            <div class="tpl-preview tpl-classic-preview"><div class="tpl-name">经典简约</div><div class="tpl-bar"></div><div class="tpl-line"></div><div class="tpl-line short"></div><div class="tpl-bar sm"></div><div class="tpl-line"></div><div class="tpl-line short"></div></div>
+            <div class="tpl-title">经典简约</div>
+          </div>
+          <div class="tpl-card" data-tpl="modern">
+            <div class="tpl-preview tpl-modern-preview"><div class="tpl-side"></div><div class="tpl-name-right">现代双色</div><div class="tpl-line-right"></div><div class="tpl-line-right short"></div><div class="tpl-line-right"></div></div>
+            <div class="tpl-title">现代双色</div>
+          </div>
+          <div class="tpl-card" data-tpl="creative">
+            <div class="tpl-preview tpl-creative-preview"><div class="tpl-head"><div class="tpl-avatar"></div><div class="tpl-name-creative">创意排版</div></div><div class="tpl-line-c"></div><div class="tpl-line-c short"></div><div class="tpl-line-c"></div></div>
+            <div class="tpl-title">创意排版</div>
+          </div>
+          <div class="tpl-card" data-tpl="tech">
+            <div class="tpl-preview tpl-tech-preview"><div class="tpl-tech-head">TECH RESUME</div><div class="tpl-tech-bar"></div><div class="tpl-line"></div><div class="tpl-line short"></div><div class="tpl-tech-tag"></div><div class="tpl-line short"></div></div>
+            <div class="tpl-title">极客技术</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-form-grid">
+        <div class="cv-form-col">
+          <h3 style="margin:0 0 10px;font-size:15px">基本信息</h3>
+          <div class="grid2">
+            <div><label>姓名</label><input type="text" id="cv-name" placeholder="张三"></div>
+            <div><label>求职意向</label><input type="text" id="cv-target" placeholder="前端开发工程师"></div>
+            <div><label>电话</label><input type="text" id="cv-phone" placeholder="138-0000-0000"></div>
+            <div><label>邮箱</label><input type="text" id="cv-email" placeholder="example@email.com"></div>
+            <div><label>所在城市</label><input type="text" id="cv-city" placeholder="北京"></div>
+            <div><label>出生年月</label><input type="text" id="cv-birth" placeholder="2000.01"></div>
+          </div>
+
+          <h3 style="margin:14px 0 10px;font-size:15px">教育背景</h3>
+          <div id="cv-edu-list"></div>
+          <button class="btn ghost sm" id="cv-add-edu">＋ 添加教育经历</button>
+
+          <h3 style="margin:14px 0 10px;font-size:15px">项目 / 实习经历</h3>
+          <div id="cv-exp-list"></div>
+          <button class="btn ghost sm" id="cv-add-exp">＋ 添加项目经历</button>
+
+          <h3 style="margin:14px 0 10px;font-size:15px">技能特长</h3>
+          <textarea id="cv-skills" placeholder="每行写一条，例如：&#10;· 熟练掌握 HTML/CSS/JavaScript，熟悉 ES6+ 新特性&#10;· 熟练使用 Vue.js / React 框架及其生态&#10;· 了解 Webpack、Vite 等前端构建工具&#10;· 掌握 Git 版本控制，熟悉团队协作流程"></textarea>
+
+          <h3 style="margin:14px 0 10px;font-size:15px">校园经历 / 获奖（可选）</h3>
+          <textarea id="cv-awards" placeholder="每行写一条，例如：&#10;· 2023-2024 学年 校级一等奖学金&#10;· 全国大学生数学建模竞赛 省级二等奖&#10;· 校学生会技术部 部长"></textarea>
+
+          <h3 style="margin:14px 0 10px;font-size:15px">自我评价（可选）</h3>
+          <textarea id="cv-summary" placeholder="简要总结你的核心优势和特点，3-5句话为佳。"></textarea>
+        </div>
+
+        <div class="cv-preview-col">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <h3 style="margin:0;font-size:15px">实时预览</h3>
+            <div class="inline-flex" style="margin-top:0">
+              <button class="btn ghost sm" id="cv-print">🖨 打印 / 导出PDF</button>
+              <button class="btn primary sm" id="cv-export-html">📥 导出HTML</button>
+            </div>
+          </div>
+          <div class="cv-preview-wrap">
+            <div id="cv-preview" class="cv-page tpl-classic"></div>
+          </div>
+          <div class="hint" style="margin-top:8px">💡 提示：点击「打印 / 导出PDF」，在打印弹窗中选择「另存为PDF」即可得到电子版简历。</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1185,6 +1404,495 @@ $('#c-export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify
 $('#c-import-btn').addEventListener('click',()=>$('#c-import').click());
 $('#c-import').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const a=JSON.parse(r.result);if(!Array.isArray(a))throw 0;comps=a;saveComps();renderComps();toast('导入 '+a.length+' 条');}catch(_){toast('格式不对');}};r.readAsText(f);e.target.value='';});
 renderComps();
+
+/* ============ 简历模板生成器 ============ */
+let cvData={tpl:'classic',name:'',target:'',phone:'',email:'',city:'',birth:'',edus:[],exps:[],skills:'',awards:'',summary:''};
+try{const s=localStorage.getItem('jh_cvdata');if(s)cvData=JSON.parse(s);}catch(_){}
+function saveCvData(){localStorage.setItem('jh_cvdata',JSON.stringify(cvData));}
+
+function initCvForm(){
+  $('#cv-name').value=cvData.name||'';
+  $('#cv-target').value=cvData.target||'';
+  $('#cv-phone').value=cvData.phone||'';
+  $('#cv-email').value=cvData.email||'';
+  $('#cv-city').value=cvData.city||'';
+  $('#cv-birth').value=cvData.birth||'';
+  $('#cv-skills').value=cvData.skills||'';
+  $('#cv-awards').value=cvData.awards||'';
+  $('#cv-summary').value=cvData.summary||'';
+  if(!cvData.edus||cvData.edus.length===0){
+    cvData.edus=[{id:Date.now(),school:'',major:'',degree:'',date:''}];
+  }
+  if(!cvData.exps||cvData.exps.length===0){
+    cvData.exps=[{id:Date.now(),name:'',role:'',date:'',desc:''}];
+  }
+  renderEduList();
+  renderExpList();
+  selectTpl(cvData.tpl||'classic');
+  renderCvPreview();
+}
+
+function selectTpl(tpl){
+  cvData.tpl=tpl;
+  saveCvData();
+  $$('#cv-tpl-grid .tpl-card').forEach(c=>c.classList.toggle('active',c.dataset.tpl===tpl));
+  const prev=$('#cv-preview');
+  prev.className='cv-page tpl-'+tpl;
+  renderCvPreview();
+}
+
+$('#cv-tpl-grid').addEventListener('click',e=>{
+  const card=e.target.closest('.tpl-card');if(!card)return;
+  selectTpl(card.dataset.tpl);
+});
+
+function renderEduList(){
+  const box=$('#cv-edu-list');box.innerHTML='';
+  cvData.edus.forEach((edu,i)=>{
+    const d=document.createElement('div');d.className='cv-edu-entry';
+    d.innerHTML=`
+      <div class="entry-head">
+        <span class="entry-title">教育经历 ${i+1}</span>
+        <div class="entry-ops">
+          <button title="上移" data-edu-up="${edu.id}">↑</button>
+          <button title="下移" data-edu-down="${edu.id}">↓</button>
+          <button title="删除" data-edu-del="${edu.id}">×</button>
+        </div>
+      </div>
+      <div class="grid2">
+        <div><label>学校名称</label><input type="text" data-edu="school" data-id="${edu.id}" value="${edu.school||''}" placeholder="如：XX大学"></div>
+        <div><label>专业</label><input type="text" data-edu="major" data-id="${edu.id}" value="${edu.major||''}" placeholder="如：计算机科学与技术"></div>
+        <div><label>学历</label><input type="text" data-edu="degree" data-id="${edu.id}" value="${edu.degree||''}" placeholder="如：本科 / 硕士"></div>
+        <div><label>就读时间</label><input type="text" data-edu="date" data-id="${edu.id}" value="${edu.date||''}" placeholder="如：2020.09 - 2024.06"></div>
+      </div>`;
+    box.appendChild(d);
+  });
+  box.querySelectorAll('input[data-edu]').forEach(inp=>{
+    inp.addEventListener('input',e=>{
+      const id=+e.target.dataset.id;const field=e.target.dataset.edu;
+      const edu=cvData.edus.find(x=>x.id===id);if(edu){edu[field]=e.target.value;saveCvData();renderCvPreview();}
+    });
+  });
+  box.querySelectorAll('[data-edu-del]').forEach(b=>b.addEventListener('click',e=>{
+    if(cvData.edus.length<=1){toast('至少保留一条教育经历');return;}
+    const id=+b.dataset.eduDel;cvData.edus=cvData.edus.filter(x=>x.id!==id);saveCvData();renderEduList();renderCvPreview();
+  }));
+  box.querySelectorAll('[data-edu-up]').forEach(b=>b.addEventListener('click',e=>{
+    const id=+b.dataset.eduUp;const i=cvData.edus.findIndex(x=>x.id===id);
+    if(i>0){[cvData.edus[i-1],cvData.edus[i]]=[cvData.edus[i],cvData.edus[i-1]];saveCvData();renderEduList();renderCvPreview();}
+  }));
+  box.querySelectorAll('[data-edu-down]').forEach(b=>b.addEventListener('click',e=>{
+    const id=+b.dataset.eduDown;const i=cvData.edus.findIndex(x=>x.id===id);
+    if(i<cvData.edus.length-1){[cvData.edus[i+1],cvData.edus[i]]=[cvData.edus[i],cvData.edus[i+1]];saveCvData();renderEduList();renderCvPreview();}
+  }));
+}
+$('#cv-add-edu').addEventListener('click',()=>{cvData.edus.push({id:Date.now(),school:'',major:'',degree:'',date:''});saveCvData();renderEduList();toast('已添加');});
+
+function renderExpList(){
+  const box=$('#cv-exp-list');box.innerHTML='';
+  cvData.exps.forEach((exp,i)=>{
+    const d=document.createElement('div');d.className='cv-exp-entry';
+    d.innerHTML=`
+      <div class="entry-head">
+        <span class="entry-title">项目经历 ${i+1}</span>
+        <div class="entry-ops">
+          <button title="上移" data-exp-up="${exp.id}">↑</button>
+          <button title="下移" data-exp-down="${exp.id}">↓</button>
+          <button title="删除" data-exp-del="${exp.id}">×</button>
+        </div>
+      </div>
+      <div class="grid2">
+        <div><label>项目 / 公司名称</label><input type="text" data-exp="name" data-id="${exp.id}" value="${exp.name||''}" placeholder="如：XX科技有限公司"></div>
+        <div><label>担任角色</label><input type="text" data-exp="role" data-id="${exp.id}" value="${exp.role||''}" placeholder="如：前端开发实习生"></div>
+        <div style="grid-column:1/-1"><label>时间</label><input type="text" data-exp="date" data-id="${exp.id}" value="${exp.date||''}" placeholder="如：2023.07 - 2023.10"></div>
+        <div style="grid-column:1/-1"><label>工作描述（每行一条，建议3-5条亮点）</label><textarea data-exp="desc" data-id="${exp.id}" placeholder="· 负责XX功能的开发与维护，使用XX技术栈&#10;· 优化了XX性能指标，提升XX%&#10;· 参与XX项目，负责XX模块"></textarea></div>
+      </div>`;
+    box.appendChild(d);
+  });
+  box.querySelectorAll('[data-exp]').forEach(inp=>{
+    inp.addEventListener('input',e=>{
+      const id=+e.target.dataset.id;const field=e.target.dataset.exp;
+      const exp=cvData.exps.find(x=>x.id===id);if(exp){exp[field]=e.target.value;saveCvData();renderCvPreview();}
+    });
+  });
+  box.querySelectorAll('[data-exp-del]').forEach(b=>b.addEventListener('click',e=>{
+    if(cvData.exps.length<=1){toast('至少保留一条项目经历');return;}
+    const id=+b.dataset.expDel;cvData.exps=cvData.exps.filter(x=>x.id!==id);saveCvData();renderExpList();renderCvPreview();
+  }));
+  box.querySelectorAll('[data-exp-up]').forEach(b=>b.addEventListener('click',e=>{
+    const id=+b.dataset.expUp;const i=cvData.exps.findIndex(x=>x.id===id);
+    if(i>0){[cvData.exps[i-1],cvData.exps[i]]=[cvData.exps[i],cvData.exps[i-1]];saveCvData();renderExpList();renderCvPreview();}
+  }));
+  box.querySelectorAll('[data-exp-down]').forEach(b=>b.addEventListener('click',e=>{
+    const id=+b.dataset.expDown;const i=cvData.exps.findIndex(x=>x.id===id);
+    if(i<cvData.exps.length-1){[cvData.exps[i+1],cvData.exps[i]]=[cvData.exps[i],cvData.exps[i+1]];saveCvData();renderExpList();renderCvPreview();}
+  }));
+}
+$('#cv-add-exp').addEventListener('click',()=>{cvData.exps.push({id:Date.now(),name:'',role:'',date:'',desc:''});saveCvData();renderExpList();toast('已添加');});
+
+['#cv-name','#cv-target','#cv-phone','#cv-email','#cv-city','#cv-birth','#cv-skills','#cv-awards','#cv-summary'].forEach(s=>{
+  $(s).addEventListener('input',e=>{
+    const key=s.replace('#cv-','');
+    if(key==='name')cvData.name=e.target.value;
+    else if(key==='target')cvData.target=e.target.value;
+    else if(key==='phone')cvData.phone=e.target.value;
+    else if(key==='email')cvData.email=e.target.value;
+    else if(key==='city')cvData.city=e.target.value;
+    else if(key==='birth')cvData.birth=e.target.value;
+    else if(key==='skills')cvData.skills=e.target.value;
+    else if(key==='awards')cvData.awards=e.target.value;
+    else if(key==='summary')cvData.summary=e.target.value;
+    saveCvData();renderCvPreview();
+  });
+});
+
+function parseLines(text){
+  return (text||'').split('\n').map(s=>s.replace(/^[·•\-*]\s*/,'').trim()).filter(Boolean);
+}
+
+function renderCvPreview(){
+  const tpl=cvData.tpl||'classic';
+  const prev=$('#cv-preview');
+  const name=cvData.name||'你的姓名';
+  const target=cvData.target||'求职意向';
+  const phone=cvData.phone||'电话';
+  const email=cvData.email||'邮箱';
+  const city=cvData.city||'';
+  const birth=cvData.birth||'';
+  const skills=parseLines(cvData.skills);
+  const awards=parseLines(cvData.awards);
+  const summary=cvData.summary||'';
+
+  let html='';
+  if(tpl==='classic'){
+    html=`
+      <div class="cv-header">
+        <h1>${escapeHtml(name)}</h1>
+        <div class="cv-target">${escapeHtml(target)}</div>
+        <div class="cv-contact">
+          ${phone?`<span>📱 ${escapeHtml(phone)}</span>`:''}
+          ${email?`<span>📧 ${escapeHtml(email)}</span>`:''}
+          ${city?`<span>📍 ${escapeHtml(city)}</span>`:''}
+          ${birth?`<span>🎂 ${escapeHtml(birth)}</span>`:''}
+        </div>
+      </div>
+      ${cvData.edus&&cvData.edus.some(e=>e.school)?`
+      <div class="cv-section">
+        <h2>教育背景</h2>
+        ${cvData.edus.filter(e=>e.school).map(edu=>`
+          <div class="cv-edu-item">
+            <div class="cv-item-head">
+              <span class="cv-item-title">${escapeHtml(edu.school||'')}</span>
+              <span class="cv-item-date">${escapeHtml(edu.date||'')}</span>
+            </div>
+            <div class="cv-item-sub">${escapeHtml(edu.major||'')}${edu.degree?' · '+escapeHtml(edu.degree):''}</div>
+          </div>
+        `).join('')}
+      </div>`:''}
+      ${cvData.exps&&cvData.exps.some(e=>e.name)?`
+      <div class="cv-section">
+        <h2>项目 / 实习经历</h2>
+        ${cvData.exps.filter(e=>e.name).map(exp=>`
+          <div class="cv-exp-item">
+            <div class="cv-item-head">
+              <span class="cv-item-title">${escapeHtml(exp.name||'')}</span>
+              <span class="cv-item-date">${escapeHtml(exp.date||'')}</span>
+            </div>
+            <div class="cv-item-sub">${escapeHtml(exp.role||'')}</div>
+            ${parseLines(exp.desc).length?`
+              <ul class="cv-item-desc">
+                ${parseLines(exp.desc).map(d=>`<li>${escapeHtml(d)}</li>`).join('')}
+              </ul>`:''}
+          </div>
+        `).join('')}
+      </div>`:''}
+      ${skills.length?`
+      <div class="cv-section">
+        <h2>技能特长</h2>
+        <ul class="cv-skills-list">
+          ${skills.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}
+        </ul>
+      </div>`:''}
+      ${awards.length?`
+      <div class="cv-section">
+        <h2>校园经历 / 获奖</h2>
+        <ul class="cv-skills-list">
+          ${awards.map(a=>`<li>${escapeHtml(a)}</li>`).join('')}
+        </ul>
+      </div>`:''}
+      ${summary?`
+      <div class="cv-section">
+        <h2>自我评价</h2>
+        <div style="font-size:12.5px;color:#444;line-height:1.7">${escapeHtml(summary)}</div>
+      </div>`:''}
+    `;
+  }else if(tpl==='modern'){
+    html=`
+      <div class="cv-sidebar">
+        <h1>${escapeHtml(name)}</h1>
+        <div class="cv-target">${escapeHtml(target)}</div>
+        <div class="cv-side-section">
+          <h3>联系方式</h3>
+          ${phone?`<div class="cv-contact-item">📱 ${escapeHtml(phone)}</div>`:''}
+          ${email?`<div class="cv-contact-item">📧 ${escapeHtml(email)}</div>`:''}
+          ${city?`<div class="cv-contact-item">📍 ${escapeHtml(city)}</div>`:''}
+          ${birth?`<div class="cv-contact-item">🎂 ${escapeHtml(birth)}</div>`:''}
+        </div>
+        ${skills.length?`
+        <div class="cv-side-section">
+          <h3>技能特长</h3>
+          <ul class="cv-skills-list">
+            ${skills.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}
+          </ul>
+        </div>`:''}
+        ${awards.length?`
+        <div class="cv-side-section">
+          <h3>荣誉奖项</h3>
+          <ul class="cv-skills-list">
+            ${awards.map(a=>`<li>${escapeHtml(a)}</li>`).join('')}
+          </ul>
+        </div>`:''}
+      </div>
+      <div class="cv-main">
+        ${cvData.edus&&cvData.edus.some(e=>e.school)?`
+        <div class="cv-section">
+          <h2>教育背景</h2>
+          ${cvData.edus.filter(e=>e.school).map(edu=>`
+            <div class="cv-edu-item">
+              <div class="cv-item-head">
+                <span class="cv-item-title">${escapeHtml(edu.school||'')}</span>
+                <span class="cv-item-date">${escapeHtml(edu.date||'')}</span>
+              </div>
+              <div class="cv-item-sub">${escapeHtml(edu.major||'')}${edu.degree?' · '+escapeHtml(edu.degree):''}</div>
+            </div>
+          `).join('')}
+        </div>`:''}
+        ${cvData.exps&&cvData.exps.some(e=>e.name)?`
+        <div class="cv-section">
+          <h2>项目 / 实习经历</h2>
+          ${cvData.exps.filter(e=>e.name).map(exp=>`
+            <div class="cv-exp-item">
+              <div class="cv-item-head">
+                <span class="cv-item-title">${escapeHtml(exp.name||'')}</span>
+                <span class="cv-item-date">${escapeHtml(exp.date||'')}</span>
+              </div>
+              <div class="cv-item-sub">${escapeHtml(exp.role||'')}</div>
+              ${parseLines(exp.desc).length?`
+                <ul class="cv-item-desc">
+                  ${parseLines(exp.desc).map(d=>`<li>${escapeHtml(d)}</li>`).join('')}
+                </ul>`:''}
+            </div>
+          `).join('')}
+        </div>`:''}
+        ${summary?`
+        <div class="cv-section">
+          <h2>自我评价</h2>
+          <div style="font-size:12.5px;color:#444;line-height:1.7">${escapeHtml(summary)}</div>
+        </div>`:''}
+      </div>
+    `;
+  }else if(tpl==='creative'){
+    html=`
+      <div class="cv-creative-head">
+        <h1>${escapeHtml(name)}</h1>
+        <div class="cv-target">${escapeHtml(target)}</div>
+        <div class="cv-contact">
+          ${phone?`<span>📱 ${escapeHtml(phone)}</span>`:''}
+          ${email?`<span>📧 ${escapeHtml(email)}</span>`:''}
+          ${city?`<span>📍 ${escapeHtml(city)}</span>`:''}
+          ${birth?`<span>🎂 ${escapeHtml(birth)}</span>`:''}
+        </div>
+      </div>
+      <div class="cv-body">
+        ${cvData.edus&&cvData.edus.some(e=>e.school)?`
+        <div class="cv-section">
+          <h2>教育背景</h2>
+          ${cvData.edus.filter(e=>e.school).map(edu=>`
+            <div class="cv-edu-item">
+              <div class="cv-item-head">
+                <span class="cv-item-title">${escapeHtml(edu.school||'')}</span>
+                <span class="cv-item-date">${escapeHtml(edu.date||'')}</span>
+              </div>
+              <div class="cv-item-sub">${escapeHtml(edu.major||'')}${edu.degree?' · '+escapeHtml(edu.degree):''}</div>
+            </div>
+          `).join('')}
+        </div>`:''}
+        ${cvData.exps&&cvData.exps.some(e=>e.name)?`
+        <div class="cv-section">
+          <h2>项目 / 实习经历</h2>
+          ${cvData.exps.filter(e=>e.name).map(exp=>`
+            <div class="cv-exp-item">
+              <div class="cv-item-head">
+                <span class="cv-item-title">${escapeHtml(exp.name||'')}</span>
+                <span class="cv-item-date">${escapeHtml(exp.date||'')}</span>
+              </div>
+              <div class="cv-item-sub">${escapeHtml(exp.role||'')}</div>
+              ${parseLines(exp.desc).length?`
+                <ul class="cv-item-desc">
+                  ${parseLines(exp.desc).map(d=>`<li>${escapeHtml(d)}</li>`).join('')}
+                </ul>`:''}
+            </div>
+          `).join('')}
+        </div>`:''}
+        ${skills.length?`
+        <div class="cv-section">
+          <h2>技能特长</h2>
+          <ul class="cv-skills-list">
+            ${skills.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}
+          </ul>
+        </div>`:''}
+        ${awards.length?`
+        <div class="cv-section">
+          <h2>校园经历 / 获奖</h2>
+          <ul class="cv-skills-list" style="grid-template-columns:1fr">
+            ${awards.map(a=>`<li>${escapeHtml(a)}</li>`).join('')}
+          </ul>
+        </div>`:''}
+        ${summary?`
+        <div class="cv-section">
+          <h2>自我评价</h2>
+          <div style="font-size:12.5px;color:#444;line-height:1.7;padding-left:14px">${escapeHtml(summary)}</div>
+        </div>`:''}
+      </div>
+    `;
+  }else if(tpl==='tech'){
+    html=`
+      <div class="cv-tech-header">
+        <h1>${escapeHtml(name)}</h1>
+        <div class="cv-target">${escapeHtml(target)}</div>
+        <div class="cv-contact">
+          ${phone?`<span>phone: ${escapeHtml(phone)}</span>`:''}
+          ${email?`<span>email: ${escapeHtml(email)}</span>`:''}
+          ${city?`<span>city: ${escapeHtml(city)}</span>`:''}
+          ${birth?`<span>birth: ${escapeHtml(birth)}</span>`:''}
+        </div>
+      </div>
+      <div class="cv-tech-body">
+        ${cvData.edus&&cvData.edus.some(e=>e.school)?`
+        <div class="cv-section">
+          <h2>Education</h2>
+          ${cvData.edus.filter(e=>e.school).map(edu=>`
+            <div class="cv-edu-item">
+              <div class="cv-item-head">
+                <span class="cv-item-title">${escapeHtml(edu.school||'')}</span>
+                <span class="cv-item-date">${escapeHtml(edu.date||'')}</span>
+              </div>
+              <div class="cv-item-sub">${escapeHtml(edu.major||'')}${edu.degree?' | '+escapeHtml(edu.degree):''}</div>
+            </div>
+          `).join('')}
+        </div>`:''}
+        ${cvData.exps&&cvData.exps.some(e=>e.name)?`
+        <div class="cv-section">
+          <h2>Experience</h2>
+          ${cvData.exps.filter(e=>e.name).map(exp=>`
+            <div class="cv-exp-item">
+              <div class="cv-item-head">
+                <span class="cv-item-title">${escapeHtml(exp.name||'')}</span>
+                <span class="cv-item-date">${escapeHtml(exp.date||'')}</span>
+              </div>
+              <div class="cv-item-sub">${escapeHtml(exp.role||'')}</div>
+              ${parseLines(exp.desc).length?`
+                <ul class="cv-item-desc">
+                  ${parseLines(exp.desc).map(d=>`<li>${escapeHtml(d)}</li>`).join('')}
+                </ul>`:''}
+            </div>
+          `).join('')}
+        </div>`:''}
+        ${skills.length?`
+        <div class="cv-section">
+          <h2>Skills</h2>
+          <ul class="cv-skills-list">
+            ${skills.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}
+          </ul>
+        </div>`:''}
+        ${awards.length?`
+        <div class="cv-section">
+          <h2>Achievements</h2>
+          <ul class="cv-awards-list">
+            ${awards.map(a=>`<li>${escapeHtml(a)}</li>`).join('')}
+          </ul>
+        </div>`:''}
+        ${summary?`
+        <div class="cv-section">
+          <h2>Summary</h2>
+          <div class="cv-summary">${escapeHtml(summary)}</div>
+        </div>`:''}
+      </div>
+    `;
+  }
+  prev.innerHTML=html;
+}
+
+function escapeHtml(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+$('#cv-print').addEventListener('click',()=>{
+  window.print();
+});
+
+$('#cv-export-html').addEventListener('click',()=>{
+  const prev=$('#cv-preview');
+  const styles=Array.from(document.styleSheets).map(s=>{
+    try{return Array.from(s.cssRules).map(r=>r.cssText).join('\n');}catch(_){return '';}
+  }).join('\n');
+  const html=`<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>${escapeHtml(cvData.name||'简历')}</title>
+<style>
+${styles}
+body{margin:0;padding:0;background:#f0f0f0}
+.cv-page{margin:20px auto;max-width:800px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+@media print{body{background:#fff}.cv-page{margin:0;max-width:none;box-shadow:none}@page{margin:0}}
+</style>
+</head>
+<body>
+${prev.outerHTML}
+</body>
+</html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=(cvData.name||'简历')+'.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('已导出HTML文件');
+});
+
+$('#cv-clear').addEventListener('click',()=>{
+  if(!confirm('确定清空所有简历数据？此操作不可恢复。'))return;
+  cvData={tpl:'classic',name:'',target:'',phone:'',email:'',city:'',birth:'',edus:[{id:Date.now(),school:'',major:'',degree:'',date:''}],exps:[{id:Date.now(),name:'',role:'',date:'',desc:''}],skills:'',awards:'',summary:''};
+  saveCvData();initCvForm();toast('已清空');
+});
+
+$('#cv-example').addEventListener('click',()=>{
+  cvData={
+    tpl:cvData.tpl||'classic',
+    name:'李明',
+    target:'前端开发工程师',
+    phone:'138-8888-8888',
+    email:'liming@email.com',
+    city:'北京',
+    birth:'2001.06',
+    edus:[
+      {id:1,school:'北京理工大学',major:'计算机科学与技术',degree:'本科',date:'2020.09 - 2024.06'}
+    ],
+    exps:[
+      {id:1,name:'字节跳动',role:'前端开发实习生',date:'2023.07 - 2023.10',
+       desc:'· 参与抖音创作者中心后台系统开发，负责数据可视化模块\n· 使用 Vue3 + ECharts 重构数据看板，首屏加载时间缩短 45%\n· 封装通用业务组件 15+，被团队 5 个项目复用'},
+      {id:2,name:'校园二手书交易平台',role:'项目负责人 / 前端开发',date:'2022.10 - 2023.05',
+       desc:'· 独立负责全栈开发，基于 Vue2 + Node.js + MySQL 搭建完整平台\n· 实现商品发布、搜索筛选、订单管理、即时通讯等核心功能\n· 平台累计注册用户 2000+，日活最高 300+，获评校级优秀项目'}
+    ],
+    skills:'· 熟练掌握 HTML/CSS/JavaScript，熟悉 ES6+ 新特性\n· 熟练使用 Vue.js 全家桶，了解 React 框架\n· 熟悉 Webpack、Vite 等前端构建工具\n· 掌握 Git 版本控制，熟悉团队协作开发流程\n· 了解 Node.js，具备简单后端开发能力\n· 英语 CET-6，能阅读英文技术文档',
+    awards:'· 2022-2023 学年 国家奖学金\n· 全国大学生软件设计大赛 二等奖\n· 校优秀学生干部',
+    summary:'热爱前端开发，有 1 年实习经验和多个全栈项目经历。熟悉现代前端技术栈，注重代码质量和用户体验。具备良好的学习能力和团队协作精神，能快速适应新技术和新环境。'
+  };
+  saveCvData();initCvForm();toast('已填入示例数据');
+});
+
+initCvForm();
 </script>
 </body>
 </html>
